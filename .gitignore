@@ -1,0 +1,4 @@
+/vendor
+/woocommerce-mix-and-match-products
+.DS_Store
+composer.lock
