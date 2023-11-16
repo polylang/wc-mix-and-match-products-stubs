@@ -2,9 +2,6 @@
 
 /**
  * Admin AJAX meta-box handlers.
- *
- * @class    WC_MNM_Admin_Ajax
- * @version  1.7.0
  */
 class WC_MNM_Admin_Ajax
 {
@@ -20,11 +17,10 @@ class WC_MNM_Admin_Ajax
     |--------------------------------------------------------------------------
     */
     /**
-     * True when displaying content in an edit-composite order item modal.
+     * True when displaying content in an edit-container order item modal.
      *
-     * @since  3.14.0
-     *
-     * @return void
+     * @deprecated 2.3.0
+     * @return bool
      */
     public static function is_container_edit_request()
     {
@@ -32,9 +28,7 @@ class WC_MNM_Admin_Ajax
     /**
      * Form content used to populate "Configure/Edit" container order item modals.
      *
-     * @since  5.8.0
-     *
-     * @return void
+     * @deprecated 2.3.0
      */
     public static function ajax_container_order_item_form()
     {
@@ -42,11 +36,44 @@ class WC_MNM_Admin_Ajax
     /**
      * Validates edited/configured containers and returns updated order items.
      *
-     * @since  5.8.0
-     *
-     * @return void
+     * @deprecated 2.3.0
      */
     public static function ajax_edit_container_in_order()
+    {
+    }
+    /**
+     * Validates user can edit this product.
+     *
+     * @return mixed - If editable will return an array. Otherwise, will return WP_Error.
+     *
+     * @deprecated 2.3.0
+     */
+    protected static function can_edit_container()
+    {
+    }
+}
+class WC_MNM_Admin_Notes
+{
+    /**
+     * Attach hooks and filters
+     */
+    public static function init()
+    {
+    }
+    /**
+     * Include the notes to create.
+     *
+     * @since 2.4.1
+     */
+    public static function possibly_add_notes()
+    {
+    }
+    /**
+     * Include the notes to create.
+     *
+     * @since 2.4.1 - renamed already.
+     */
+    public static function initialize_notes()
     {
     }
 }
@@ -57,19 +84,6 @@ class WC_MNM_Admin_Ajax
  */
 class WC_MNM_Admin_Notices
 {
-    private static $counter = 1;
-    /**
-     * Stores notices.
-     *
-     * @var array
-     */
-    private static $notices = array();
-    /**
-     * Array of notices - name => callback.
-     *
-     * @var array
-     */
-    private static $core_notices = array('update' => 'update_notice');
     /**
      * Constructor.
      */
@@ -84,7 +98,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Get notices
-     * 
+     *
      * @since 2.0.0
      *
      * @return array
@@ -110,9 +124,9 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Remove a notice from being displayed.
-     * 
+     *
      * @since 2.0.0
-     * 
+     *
      * @see WC_Admin_Notices::hide_notice() if there is a need to make a notice dismissable and store user meta. More relevant to optional notices.
      *
      * @param string $name Notice name.
@@ -123,7 +137,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * See if a notice is being shown.
-     * 
+     *
      * @since 2.0.0
      *
      * @param string $name Notice name.
@@ -134,7 +148,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Hide a notice if the GET variable is set.
-     * 
+     *
      * @since 2.0.0
      */
     public static function hide_notices()
@@ -149,7 +163,7 @@ class WC_MNM_Admin_Notices
     /**
      * Add custom notice.
      * NB: see WC_Admin_Notices:add_custom_notice if we need to make these persistent/dismissiable.
-     * 
+     *
      * @since 2.0.0
      *
      * @param string $name        Notice name - currently not used.
@@ -174,7 +188,7 @@ class WC_MNM_Admin_Notices
     */
     /**
      * Show any stored error messages.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public static function output_notices()
@@ -182,7 +196,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Add a maintenance notice to be displayed.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  string  $notice_name
@@ -192,7 +206,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Remove a maintenance notice.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  string  $notice_name
@@ -236,7 +250,7 @@ class WC_MNM_Admin_Notices
     }
     /**
      * Save errors to an option.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public static function save_notices()
@@ -327,18 +341,10 @@ class WC_Mix_and_Match_Admin
     }
     /**
      * Renders the MNM information in the WC status page
+     *
      * @props to ProsPress
      */
     public static function render_system_status_items()
-    {
-    }
-    /**
-     * Determine which of our files have been overridden by the theme.
-     *
-     * @props Jeremy Pry
-     * @return array Theme override data.
-     */
-    private static function get_theme_overrides()
     {
     }
     /**
@@ -369,11 +375,6 @@ class WC_Mix_and_Match_Admin
 class WC_MNM_Product_Export
 {
     /**
-     * var WC_Product_CSV_Exporter Class.
-     * @since 2.0.0
-     */
-    private $exporter = \false;
-    /**
      * Hook in.
      */
     public static function init()
@@ -390,7 +391,7 @@ class WC_MNM_Product_Export
     }
     /**
      * "Contents source" column content.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  mixed       $value
@@ -402,7 +403,7 @@ class WC_MNM_Product_Export
     }
     /**
      * "Child Category Ids" column content.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  mixed       $value
@@ -464,7 +465,7 @@ class WC_MNM_Product_Export
     }
     /**
      * "Container Weight Cumulative" column content.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  mixed       $value
@@ -521,8 +522,30 @@ class WC_MNM_Product_Export
     {
     }
     /**
+     * JSON-encode child items for export.
+     *
+     * @since 2.3.0
+     *
+     * @param  WC_Product  $product
+     * @return mixed       $value
+     */
+    public static function prepare_child_items_for_export($product)
+    {
+    }
+    /**
+     * JSON encode categories for export.
+     *
+     * @since 2.3.0
+     *
+     * @param  WC_Product  $product
+     * @return mixed       $value
+     */
+    public static function prepare_child_category_ids_for_export($product)
+    {
+    }
+    /**
      * MnM contents data column content.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  mixed       $value
@@ -534,7 +557,7 @@ class WC_MNM_Product_Export
     }
     /**
      * "Container shipped per product" column content.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  mixed       $value
@@ -552,11 +575,6 @@ class WC_MNM_Product_Export
  */
 class WC_MNM_Product_Import
 {
-    /**
-     * var WC_Product_CSV_Importer Class.
-     * @since 2.0.0
-     */
-    private $importer = \false;
     /**
      * Hook in.
      */
@@ -582,15 +600,37 @@ class WC_MNM_Product_Import
     {
     }
     /**
-     * Decode MNM child category items and parse relative term IDs.
-     * 
-     * @since 2.0.0
+     * Set formatting (decoding) callback for child item data.
      *
-     * @param  array                    $parsed_data
+     * @since  2.3.0
+     *
+     * @param  array                    $callbacks
      * @param  WC_Product_CSV_Importer  $importer
      * @return array
      */
-    public static function parse_child_category_ids($parsed_data, $importer)
+    public static function append_formatting_callbacks($callbacks, $importer)
+    {
+    }
+    /**
+     * JSON Decode MNM child data.
+     *
+     * @since 2.3.0
+     *
+     * @param string $value Field value.
+     * @return array
+     */
+    public static function decode_child_items($value)
+    {
+    }
+    /**
+     * If not null string, parse an integer.
+     *
+     * @since 2.3.0
+     *
+     * @param string $value Field value.
+     * @return mixed
+     */
+    public static function maybe_parse_intval($value)
     {
     }
     /**
@@ -605,16 +645,28 @@ class WC_MNM_Product_Import
     }
     /**
      * Set container-type props.
+     * NB: We shouldn't need to parse anything further here. Parsed by core on import and rest handled by setters.
      *
+     * @param WC_Product
      * @param  array  $parsed_data
-     * @return array
+     * @return WC_Product
      */
     public static function set_mnm_props($product, $data)
     {
     }
     /**
+     * Get container-type props from parsed data.
+     *
+     * @param  array  $data
+     * @param WC_Product
+     * @return array
+     */
+    public static function get_parsed_props($data, $product)
+    {
+    }
+    /**
      * Decode MNM data items and parse relative IDs.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  array                    $parsed_data
@@ -624,17 +676,28 @@ class WC_MNM_Product_Import
     public static function parse_mnm_items($parsed_data, $importer)
     {
     }
+    /**
+     * Decode MNM child category items and parse relative term IDs.
+     *
+     * @since 2.0.0
+     * @deprecated 2.3.0 - Register formatter directly in append_formatting_callbacks()
+     *
+     * @param  array                    $parsed_data
+     * @param  WC_Product_CSV_Importer  $importer
+     * @return array
+     */
+    public static function parse_child_category_ids($parsed_data, $importer)
+    {
+    }
 }
 /**
  * Mix and Match edit-order functions and filters.
- *
- * @class    WC_MNM_Meta_Box_Order
- * @version  1.7.0
  */
 class WC_MNM_Meta_Box_Order
 {
     /**
      * Order object to use in 'display_edit_button'.
+     *
      * @var WC_Order
      */
     protected static $order;
@@ -655,7 +718,6 @@ class WC_MNM_Meta_Box_Order
      * @param  $item_id  int
      * @param  $item     WC_Order_Item
      * @param  $order    WC_Order
-     * @return void
      */
     public static function add_child_items($item_id, $item, $order)
     {
@@ -671,14 +733,52 @@ class WC_MNM_Meta_Box_Order
     {
     }
     /**
+     * Reattach the edit button when doing ajax.
+     *
+     * @since 2.4.0
+     */
+    public static function reattach_edit_button()
+    {
+    }
+    /**
      * Display "Configure/Edit" button next to configurable Mix and Match container items in the edit-order screen.
+     *
+     * @param  $item_id  int
+     * @param  $item     WC_Order_Item
+     * @param  $order    WC_Product
+     */
+    public static function display_edit_button($item_id, $item, $product)
+    {
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Edit-Order Modal.
+    |--------------------------------------------------------------------------
+    */
+    /**
+     * Force tabular layout and hide child links.
+     *
+     * @since 2.3.0
+     *
+     * @param  $product  WC_Product_Mix_and_Match
+     * @param  $order_item WC_Order_Item
+     * @param  $order      WC_Order
+     * @param  string $source The originating source loading this template
+     */
+    public static function force_container_styles($product, $order_item, $order, $source)
+    {
+    }
+    /**
+     * Nuke any theme overrides of quantity-input.php template.
+     *
+     * @since 2.3.0
      *
      * @param  $item_id  int
      * @param  $item     WC_Order_Item
      * @param  $order    WC_Product
      * @return void
      */
-    public static function display_edit_button($item_id, $item, $product)
+    public static function force_core_template($template, $template_name, $args, $template_path, $default_path)
     {
     }
     /**
@@ -810,6 +910,96 @@ class WC_MNM_Meta_Box_Product_Data
     public static function process_mnm_data($product)
     {
     }
+    /**
+     * Process allowed child items into array.
+     *
+     * @param  WC_Product $product
+     * @param  array $data [ int The Product|Variation ID ]
+     * @return array [ int => [
+     *                      'product_id' => int,
+     *                      'variation_id' => int
+     *               ] ]
+     */
+    public static function process_child_items_data($product, $data)
+    {
+    }
+}
+/**
+ * Support note.
+ */
+class WC_MNM_Notes_Get_Support
+{
+    /**
+     * Note traits.
+     */
+    use \Automattic\WooCommerce\Admin\Notes\NoteTraits;
+    /**
+     * Name of the note for use in the database.
+     */
+    const NOTE_NAME = 'wc-mnm-admin-get-support-note';
+    /**
+     * Get the note.
+     *
+     * @return Note
+     */
+    public static function get_note()
+    {
+    }
+}
+/**
+ * Add_First_Product.
+ */
+class WC_MNM_Notes_Help_Improve
+{
+    /**
+     * Note traits.
+     */
+    use \Automattic\WooCommerce\Admin\Notes\NoteTraits;
+    /**
+     * Name of the note for use in the database.
+     */
+    const NOTE_NAME = 'wc-mnm-admin-help-improve-note';
+    /**
+     * Get the note.
+     *
+     * @return Note
+     */
+    public static function get_note()
+    {
+    }
+}
+/**
+ * WC_MNM_Notes_Run_Db_Update.
+ */
+class WC_MNM_Notes_Run_Db_Update
+{
+    const NOTE_NAME = 'wc-mnm-update-db-reminder';
+    /**
+     * Attach hooks.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Set this notice to an actioned one, so that it's no longer displayed.
+     */
+    public static function set_notice_actioned()
+    {
+    }
+    /**
+     * Prepare the correct content of the db update note to be displayed by WC Admin.
+     *
+     * This one gets called on each page load, so try to bail quickly.
+     *
+     * If the db needs an update, the notice should be always shown.
+     * If the db does not need an update, but the notice has *not* been actioned (i.e. after the db update, when
+     * store owner hasn't acknowledged the successful db update), still show the Thanks notice.
+     * If the db does not need an update, and the notice has been actioned, then notice should *not* be shown.
+     * The notice should also be hidden if the db does not need an update and the notice does not exist.
+     */
+    public static function show_reminder()
+    {
+    }
 }
 /**
  * WC_Mix_and_Match_REST_API Class.
@@ -844,14 +1034,6 @@ class WC_Mix_and_Match_REST_API
     {
     }
     /**
-     * Gets extended (unprefixed) schema properties for products.
-     *
-     * @return array
-     */
-    private static function get_extended_product_schema()
-    {
-    }
-    /**
      * Filter the data for a response.
      *
      * The dynamic portion of the hook name, $this->post_type,
@@ -865,17 +1047,6 @@ class WC_Mix_and_Match_REST_API
     {
     }
     /**
-     * Convert child items into a REST readable array.
-     *
-     * @since 2.0.0
-     * 
-     * @param WC_Product     $product  Product object.
-     * @return array
-     */
-    private static function prepare_child_items_response($product)
-    {
-    }
-    /**
      * Filters an object before it is inserted via the REST API.
      *
      * @param WC_Product     $product  Product object.
@@ -883,19 +1054,6 @@ class WC_Mix_and_Match_REST_API
      * @return WC_Product     $product  Product object.
      */
     public static function prepare_insert_product($product, $request)
-    {
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | Orders.
-    |--------------------------------------------------------------------------
-    */
-    /**
-     * Gets extended (unprefixed) schema properties for order line items.
-     *
-     * @return array
-     */
-    private static function get_extended_order_line_item_schema()
     {
     }
     /**
@@ -952,17 +1110,9 @@ class WC_Mix_and_Match_REST_API
 }
 /**
  * Extends the store public API with container related data for each container parent and child item.
- *
- * @version 2.1.0
  */
 class WC_MNM_Store_API
 {
-    /**
-     * Stores the cart item key of the last child item.
-     *
-     * @var string
-     */
-    private static $last_child_item_key;
     /**
      * Plugin Identifier, unique to each plugin.
      *
@@ -981,6 +1131,11 @@ class WC_MNM_Store_API
     public static function extend_store()
     {
     }
+    /*
+    |--------------------------------------------------------------------------
+    | Cart Item Functions.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Register parent/child product data into cart/items endpoint.
      *
@@ -991,77 +1146,11 @@ class WC_MNM_Store_API
     {
     }
     /**
-     * Register subscription product schema into cart/items endpoint.
+     * Register mix and match product schema into cart/items endpoint.
      *
      * @return array Registered schema.
      */
     public static function extend_cart_item_schema()
-    {
-    }
-    /**
-     * Aggregates container item prices.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_container_cart_item_prices(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Aggregates container item subtotals.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_container_cart_item_totals(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Adjust container item quantity limits to prevent child items from being edited.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_container_cart_item_quantity_limits(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Filter container cart item permalink to support cart editing.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_container_cart_item_permalink(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Disable editing for child item quantities.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_child_cart_item_quantity_limits(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Disable permalinks for child items.
-     *
-     * @param array  $item_data
-     * @param array  $cart_item
-     */
-    private static function filter_child_cart_item_permalink(&$item_data, $cart_item)
-    {
-    }
-    /**
-     * Convert monetary values from WooCommerce to string based integers, using
-     * the smallest unit of a currency.
-     *
-     * @param string|float  $amount
-     * @param int           $decimals
-     * @param int           $rounding_mode
-     * @return string
-     */
-    private static function prepare_money_response($amount, $decimals = 2, $rounding_mode = \PHP_ROUND_HALF_UP)
     {
     }
     /*
@@ -1101,17 +1190,29 @@ class WC_MNM_Store_API
      *
      * @param  WC_Product  $product
      * @param  array       $cart_item
+     * @throws RouteException On error.
      */
     public static function validate_cart_item($product, $cart_item)
     {
     }
     /**
-     * Prevents access to the checkout block if a cart in the cart is misconfigured.
+     * Remove quantity inputs from child items in Store API context.
+     *
+     * @param bool $qty_is_editable
+     * @param  WC_Product  $product
+     * @param  array       $cart_item
+     * @return false
+     */
+    public static function product_quantity_editable($qty_is_editable, $product, $cart_item)
+    {
+    }
+    /**
+     * Prevents access to the checkout block if a container in the cart is misconfigured.
      *
      * @throws RouteException
      *
      * @param  WC_Order  $order
-     * @return array
+     * @throws RouteException On error.
      */
     public static function validate_draft_order($order)
     {
@@ -1131,8 +1232,6 @@ class WC_MNM_Store_API
 }
 /**
  * Class for integrating with WooCommerce Blocks scripts.
- *
- * @version 2.1.0
  */
 class WC_MNM_Checkout_Blocks_Integration implements \Automattic\WooCommerce\Blocks\Integrations\IntegrationInterface
 {
@@ -1228,7 +1327,7 @@ class WC_Mix_and_Match
      *
      * @var str
      */
-    public $version = '2.0.0';
+    public $version = '2.5.0';
     /**
      * Required Version of WooCommerce.
      *
@@ -1274,9 +1373,11 @@ class WC_Mix_and_Match
     public function __construct()
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Helper Functions                                                                 */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Helper Functions.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Get the plugin url.
      *
@@ -1309,14 +1410,17 @@ class WC_Mix_and_Match
      * @since 2.0.0
      *
      * @param  string  $file
+     * @param  string  $version - A version number, handy for mini-extensions to make use of this method.
      * @return string
      */
-    public function get_file_version($file)
+    public function get_file_version($file, $version = '')
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Load Files                                                                       */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Load Files.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Fire in the hole!
      */
@@ -1359,9 +1463,11 @@ class WC_Mix_and_Match
     public function theme_includes()
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Localization                                                                     */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Localization.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Make the plugin translation ready.
      *
@@ -1373,9 +1479,11 @@ class WC_Mix_and_Match
     public function load_plugin_textdomain()
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Resources                                                                        */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Resources.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Returns URL to a doc or support resource.
      *
@@ -1389,6 +1497,115 @@ class WC_Mix_and_Match
     }
 }
 /**
+ * AJAX handlers - used in order metabox and subscriptions frontend.
+ *
+ * @class    WC_MNM_Ajax
+ */
+class WC_MNM_Ajax
+{
+    /**
+     * Hook in.
+     */
+    public static function init()
+    {
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Edit-Order.
+    |--------------------------------------------------------------------------
+    */
+    /**
+     * True when displaying content in an edit-container order item modal.
+     *
+     * @since 2.4.0
+     * @return bool
+     */
+    public static function is_container_edit_request()
+    {
+    }
+    /**
+     * Form content used to populate "Configure/Edit" container order item modals.
+     */
+    public static function edit_container_order_item_form()
+    {
+    }
+    /**
+     * Updates the MNM container config.
+     */
+    public static function update_container_order_item()
+    {
+    }
+    /**
+     * Validates user can edit this product.
+     *
+     * @return mixed - If editable will return an array. Otherwise, will return WP_Error.
+     */
+    protected static function can_edit_container()
+    {
+    }
+    /**
+     * Load the scripts required for order editing.
+     *
+     * @param int $item_id The subscription line item ID.
+     * @param WC_Order_Item|array $item The subscription line item.
+     * @param WC_Subscription $subscription The subscription.
+     */
+    public static function load_edit_scripts()
+    {
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Edit-Order Modal.
+    |--------------------------------------------------------------------------
+    */
+    /**
+     * Force tabular layout and hide child links.
+     *
+     * @since 2.4.0
+     *
+     * @param  $product  WC_Product_Mix_and_Match
+     * @param  $order_item WC_Order_Item
+     * @param  $order      WC_Order
+     * @param  string $source The originating source loading this template
+     */
+    public static function force_container_styles($product, $order_item, $order, $source)
+    {
+    }
+    /**
+     * Nuke any theme overrides of quantity-input.php template.
+     *
+     * @since 2.4.0
+     *
+     * @param  $item_id  int
+     * @param  $item     WC_Order_Item
+     * @param  $order    WC_Product
+     * @return void
+     */
+    public static function force_core_template($template, $template_name, $args, $template_path, $default_path)
+    {
+    }
+}
+/**
+ * Autoloader class.
+ */
+class WC_MNM_Autoloader
+{
+    /**
+     * The Constructor.
+     */
+    public function __construct()
+    {
+    }
+    /**
+     * Auto-load WC classes on demand to reduce memory consumption.
+     *
+     * @param string $class Class name.
+     */
+    public function autoload($class)
+    {
+    }
+}
+/**
  * WC_Mix_and_Match_Cart Class.
  *
  * Functions and filters for adding Mix and Match type products to cart.
@@ -1397,6 +1614,7 @@ class WC_Mix_and_Match_Cart
 {
     /**
      * The single instance of the class.
+     *
      * @var WC_Mix_and_Match_Cart
      *
      * @since 1.9.2
@@ -1460,7 +1678,13 @@ class WC_Mix_and_Match_Cart
     {
     }
     /**
-     * Build container configuration array from posted data. Array example:
+     * Build container configuration array from posted data.
+     *
+     * @param  mixed  $product
+     * @param  array $config example: array(
+     *      134 => 2 // product|variation_id => quantity.
+     * )
+     * @return array example:
      *
      *    $config = array(
      *        134 => array(                             // ID of child item.
@@ -1471,11 +1695,8 @@ class WC_Mix_and_Match_Cart
      *            'variation'         => array( 'color' => 'blue' ) // Attributes of chosen variation.
      *        )
      *    );
-     *
-     * @param  mixed  $product
-     * @return array
      */
-    public function get_posted_container_configuration($product)
+    public function get_posted_container_configuration($product, $config = array())
     {
     }
     /**
@@ -1490,7 +1711,7 @@ class WC_Mix_and_Match_Cart
      *         'mnm_quantity' => array( array( $ID => $quantity ) )
      *    );
      */
-    public function rebuild_posted_container_form_data($configuration, $container = \null)
+    public function rebuild_posted_container_form_data($configuration = array(), $container = \null)
     {
     }
     /**
@@ -1541,9 +1762,9 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Check container cart item configuration and children.
-     * 
+     *
      * @since 2.0.0
-     * 
+     *
      * @param  array $cart_item
      */
     public function validate_container_in_cart($cart_item)
@@ -1552,7 +1773,7 @@ class WC_Mix_and_Match_Cart
     /**
      * Validates add to cart for MNM containers.
      * Basically ensures that stock for all child products exists before attempting to add them to cart.
-     * 
+     *
      * @throws Exception
      *
      * @since  1.4.0
@@ -1592,30 +1813,10 @@ class WC_Mix_and_Match_Cart
      *
      * @param  array  $cart_item_data
      * @param  int    $product_id
+     * @param int $variation_id Child item's variation ID.
      * @return array
      */
-    public function add_cart_item_data($cart_item_data, $product_id)
-    {
-    }
-    /**
-     * Modifies mnm cart item virtual status and price depending on pricing and shipping options.
-     *
-     * @param  array                     $cart_item
-     * @param  WC_Product_Mix_and_Match  $container
-     * @return array
-     */
-    private function set_mnm_cart_item($cart_item, $container)
-    {
-    }
-    /**
-     * Modifies MNM cart item data. Container price is equal to the base price in Per-Item Pricing mode.
-     *
-     * @since  1.4.0
-     *
-     * @param array $cart_item
-     * @return array $cart_item
-     */
-    private function set_mnm_container_cart_item($cart_item)
+    public function add_cart_item_data($cart_item_data, $product_id, $variation_id)
     {
     }
     /**
@@ -1662,7 +1863,7 @@ class WC_Mix_and_Match_Cart
     /**
      * Filters the reported cart weights.
      * Counts cumulative weight of containers.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  float  $weight
@@ -1718,6 +1919,7 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Find the parent of a child item in a cart.
+     *
      * @deprecated 1.4.0
      *
      * @param  array  $item
@@ -1728,9 +1930,8 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Do not show mix and matched items in cart widget.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
      *
      * @param  bool     $show
      * @param  array    $cart_item
@@ -1742,9 +1943,9 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Filters the reported number of cart items.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
+     *
      * Counts only MnM containers.
      *
      * @param  int  $count
@@ -1756,9 +1957,8 @@ class WC_Mix_and_Match_Cart
     /**
      * MnM items can't be removed individually from the cart.
      * This filter doesn't pass the $cart_item array for some reason.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
      *
      * @param  string  $link
      * @param  string  $cart_item_key
@@ -1769,9 +1969,8 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Modifies the cart.php formatted quantity for items in the container.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
      *
      * @param  string  $quantity
      * @param  string  $cart_item_key
@@ -1783,9 +1982,8 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Modifies the cart.php formatted html prices visibility for items in the container.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
      *
      * @param  string  $price
      * @param  array   $cart_item
@@ -1797,9 +1995,8 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Modifies the cart.php template formatted subtotal appearance.
-     * 
+     *
      * @deprecated 2.0.0
-     * 
      *
      * @param  string  $subtotal
      * @param  array   $cart_item
@@ -1811,9 +2008,9 @@ class WC_Mix_and_Match_Cart
     }
     /**
      * Outputs a formatted subtotal ( @see cart_item_subtotal() ).
-     * 
+     *
      * @deprecated 2.0.0
-     * 
+     *
      * @static
      * @param  obj     $product   The WC_Product.
      * @param  string  $subtotal  Formatted subtotal.
@@ -1827,7 +2024,6 @@ class WC_Mix_and_Match_Cart
  * Child Item class.
  *
  * @class    WC_MNM_Child_Item
- * @version  2.0.0
  */
 class WC_MNM_Child_Item extends \WC_Data
 {
@@ -1837,16 +2033,6 @@ class WC_MNM_Child_Item extends \WC_Data
      * @var array
      */
     protected $data = array('product_id' => 0, 'variation_id' => 0, 'container_id' => 0, 'menu_order' => 0, 'priced_individually' => \null, 'discount' => \null);
-    /**
-     * Product instance of the associated child product.
-     * @var WC_Product
-     */
-    private $product;
-    /**
-     * Product instance of the parent container.
-     * @var WC_Product_Mix_and_Match
-     */
-    private $container;
     /**
      * Stores meta in cache for future reads.
      * A group must be set to to enable caching.
@@ -1923,7 +2109,7 @@ class WC_MNM_Child_Item extends \WC_Data
     }
     /**
      * Get the discount - Currently inherited from the parent container.
-     * 
+     *
      * @param string $context
      * @return string|float
      */
@@ -1932,7 +2118,7 @@ class WC_MNM_Child_Item extends \WC_Data
     }
     /**
      * Get priced individually - Currently inherited from the parent container.
-     * 
+     *
      * @param string $context
      * @return string|float
      */
@@ -2008,6 +2194,26 @@ class WC_MNM_Child_Item extends \WC_Data
     public function get_availability_html()
     {
     }
+    /**
+     * Item title.
+     *
+     * @since  2.2.0
+     *
+     * @return string
+     */
+    public function get_title()
+    {
+    }
+    /**
+     * Item permalink.
+     *
+     * @since  2.2.0
+     *
+     * @return string
+     */
+    public function get_permalink()
+    {
+    }
     /*
     |--------------------------------------------------------------------------
     | Setters
@@ -2053,12 +2259,6 @@ class WC_MNM_Child_Item extends \WC_Data
     public function set_menu_order($value)
     {
     }
-    /**
-     * Runtime application of prices to product via props.
-     */
-    private function set_price_props()
-    {
-    }
     /*
     |--------------------------------------------------------------------------
     | Conditional Methods
@@ -2092,17 +2292,17 @@ class WC_MNM_Child_Item extends \WC_Data
     }
     /**
      * Returns whether or not the item's product price is discounted.
-     * 
+     *
      * @param string $context
-     * @return string|float
+     * @return cool
      */
     public function has_discount($context = 'view')
     {
     }
     /**
      * Returns whether or not the item's product price is discounted from regular price or sale price.
-     * 
-     * @return string|float
+     *
+     * @return bool
      */
     public function is_discounted_from_regular_price()
     {
@@ -2117,6 +2317,7 @@ class WC_Mix_and_Match_Display
 {
     /**
      * The single instance of the class.
+     *
      * @var WC_Mix_and_Match_Display
      *
      * @since 1.9.2
@@ -2133,20 +2334,16 @@ class WC_Mix_and_Match_Display
     {
     }
     /**
-     * Flag used to insert some JS into table for reliable indentation.
-     *
-     * @var bool
-     */
-    private $enqueued_table_item_js = \false;
-    /**
      * __construct function.
      */
     public function __construct()
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Scripts and Styles                                                               */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Scripts and Styles.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Load scripts.
      */
@@ -2162,9 +2359,11 @@ class WC_Mix_and_Match_Display
     public static function get_add_to_cart_parameters($deprecated = \false)
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Cart Display                                                                     */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Cart Display.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Changes the tr class of MNM content items to allow their styling.
      *
@@ -2179,7 +2378,7 @@ class WC_Mix_and_Match_Display
     /**
      * MnM items can't be removed individually from the cart.
      * This filter doesn't pass the $cart_item array for some reason.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  string  $link
@@ -2191,7 +2390,7 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Adds style wrapper to child cart items.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  string   $content
@@ -2202,7 +2401,7 @@ class WC_Mix_and_Match_Display
     {
     }
     /**
-     * Adds edit button to container cart items.
+     * Adds arrows to child products.
      *
      * @param  string   $content
      * @param  array    $cart_item
@@ -2210,6 +2409,17 @@ class WC_Mix_and_Match_Display
      * @return string
      */
     public function in_cart_item_title($content, $cart_item, $cart_item_key)
+    {
+    }
+    /**
+     * Adds edit button to container cart items.
+     *
+     * @since 2.4.8
+     *
+     * @param  array    $cart_item
+     * @param  string   $cart_item_key
+     */
+    public function edit_selections_button($cart_item, $cart_item_key)
     {
     }
     /**
@@ -2226,7 +2436,7 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Modifies the cart.php formatted quantity for items in the container.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  string  $quantity
@@ -2239,7 +2449,7 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Modifies the cart.php formatted html prices visibility for items in the container.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  string  $price
@@ -2256,7 +2466,7 @@ class WC_Mix_and_Match_Display
      * @since  2.1.0
      *
      * @param  array   $cart_item
-     * @param  strong  $type Values: 'price' | 'regular_price' | 'sale_price' 
+     * @param  strong  $type Values: 'price' | 'regular_price' | 'sale_price'
      * @return string
      */
     public function get_container_cart_item_price_amount($cart_item, $type = 'price')
@@ -2264,7 +2474,7 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Modifies line item subtotals in the 'cart.php' & 'review-order.php' templates.
-     * 
+     *
      * @since 2.1.0
      *
      * @param  string  $subtotal
@@ -2277,7 +2487,7 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Aggregates cart item totals.
-     * 
+     *
      * @since 2.1.0
      *
      * @param  array   $cart_item
@@ -2289,9 +2499,9 @@ class WC_Mix_and_Match_Display
     }
     /**
      * Outputs a formatted subtotal ( @see cart_item_subtotal() ). how necessary is this one?
-     * 
+     *
      * @since 2.1.0
-     * 
+     *
      * @param  obj     $product   The WC_Product.
      * @param  string  $subtotal  Formatted subtotal.
      * @return string             Modified formatted subtotal.
@@ -2309,14 +2519,70 @@ class WC_Mix_and_Match_Display
     {
     }
     /**
+     * Add cart widget filters.
+     *
+     * @since  2.0.5
+     */
+    public function add_cart_widget_filters()
+    {
+    }
+    /**
+     * Remove cart widget filters.
+     *
+     * @since  2.0.5
+     */
+    public function remove_cart_widget_filters()
+    {
+    }
+    /**
+     * Change the li class of composite parent/child items in mini-cart templates to allow their styling.
+     *
+     * @since  2.0.5
+     *
+     * @param  string  $classname
+     * @param  array   $cart_item
+     * @return string
+     */
+    public function mini_cart_item_class($classname, $cart_item)
+    {
+    }
+    /**
      * Do not show mix and matched items in cart widget.
+     *
+     * @since  1.0.0
+     * @since  2.0.5 - Renamed from cart_widget_filter.
      *
      * @param  bool     $show
      * @param  array    $cart_item
      * @param  string   $cart_item_key
      * @return bool
      */
-    public function cart_widget_filter($show, $cart_item, $cart_item_key)
+    public function cart_widget_item_visible($show, $cart_item, $cart_item_key)
+    {
+    }
+    /**
+     * Adds content data as parent item meta (by default in the mini-cart only).
+     *
+     * @since  2.0.5
+     *
+     * @param  array  $data
+     * @param  array  $cart_item
+     * @return array
+     */
+    public function cart_widget_container_item_data($data, $cart_item)
+    {
+    }
+    /**
+     * Get container configuration data.
+     *
+     * @since  2.0.5
+     *
+     * @param  array  $cart_item
+     * @param  array  $args
+     *
+     * @return array
+     */
+    public function get_container_config_cart_item_data($cart_item, $args = array())
     {
     }
     /**
@@ -2330,7 +2596,7 @@ class WC_Mix_and_Match_Display
     {
     }
     /**
-     * Add "Includes" cart item data to container items. ANd "Part of" cart item data to child items.
+     * Add "Configuration" cart item data to container items.
      *
      * @param  array  $data
      * @param  array  $cart_item
@@ -2339,9 +2605,11 @@ class WC_Mix_and_Match_Display
     public function cart_item_data($data, $cart_item)
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /*  Order Display                                                                    */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Order Display.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Adds child item title preambles to order-details template.
      *
@@ -2394,9 +2662,11 @@ class WC_Mix_and_Match_Display
     public function order_item_meta_label($display_key, $meta, $order_item)
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /* Emails */
-    /*-----------------------------------------------------------------------------------*/
+    /*
+    |--------------------------------------------------------------------------
+    | Emails.
+    |--------------------------------------------------------------------------
+    */
     /**
      * Indent child items in emails.
      *
@@ -2408,13 +2678,12 @@ class WC_Mix_and_Match_Display
     }
     /*
     |--------------------------------------------------------------------------
-    | Deprecated methods.
-    |
-    --------------------------------------------------------------------------
+    | Deprecated.
+    |--------------------------------------------------------------------------
     */
     /**
      * Add-to-cart template for Mix and Match products.
-     * 
+     *
      * @deprecated 1.3.0
      */
     public function add_to_cart_template()
@@ -2422,19 +2691,23 @@ class WC_Mix_and_Match_Display
     }
     /**
      * QuickView scripts init.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public function quickview_support()
     {
     }
     /**
-     * Enqeue js that wraps child table items in a div in order to apply indentation reliably.
+     * Do not show mix and matched items in cart widget.
      *
-     * @since 1.0.2
-     * @deprecated 2.0.0
+     * @deprecated 2.0.5 - Soft deprecated.
+     *
+     * @param  bool     $show
+     * @param  array    $cart_item
+     * @param  string   $cart_item_key
+     * @return bool
      */
-    private function enqueue_table_item_js()
+    public function cart_widget_filter($show, $cart_item, $cart_item_key)
     {
     }
 }
@@ -2505,18 +2778,44 @@ class WC_MNM_Helpers
     }
     /**
      * Format a product title incl qty.
-     * 
+     *
      * @since 1.11.4
      *
      * @param  string  $title
      * @param  string  $qty
      * @return string
      */
-    public static function format_product_title($title, $qty = '')
+    public static function format_product_title($title, $qty = '', $args = array())
     {
     }
-    /*-----------------------------------------------------------------------------------*/
-    /* Deprecated Functions */
+    /**
+     * Recursive version of 'urlencode' for multidimensional assosciative arrays.
+     *
+     * Hat tip to Composite Products.
+     *
+     * @since  2.2.0
+     *
+     * @param  function  $array
+     * @param  array     $escaped_array
+     * @return array
+     */
+    public static function urlencode_recursive($array)
+    {
+    }
+    /**
+     * Check how long plugin has been active for.
+     *
+     * @since   2.4.0
+     * @param   int $seconds - Time in seconds to check.
+     * @return  boolean|int Whether or not plugin has been active for $seconds.
+     */
+    public static function is_plugin_active_for($seconds = '')
+    {
+    }
+    /*
+    	-----------------------------------------------------------------------------------*/
+    /*
+    	Deprecated Functions */
     /*-----------------------------------------------------------------------------------*/
     /**
      * Helper method to get the version of the currently installed WooCommerce
@@ -2578,29 +2877,6 @@ class WC_MNM_Helpers
  */
 class WC_MNM_Install
 {
-    /**
-     * DB updates and callbacks that need to be run per version.
-     *
-     * @var array
-     */
-    private static $db_updates = array('1.2.0' => array('wc_mnm_update_120_main'), '1.10.0' => array('wc_mnm_update_1x10_product_meta', 'wc_mnm_update_1x10_order_item_meta'), '2.0.0' => array('wc_mnm_update_2x00_remove_notices', 'wc_mnm_update_2x00_customizer_settings', 'wc_mnm_update_2x00_custom_tables', 'wc_mnm_update_2x00_order_item_meta', 'wc_mnm_update_2x00_category_contents_meta', 'wc_mnm_update_2x00_product_meta'));
-    /**
-     * Term runtime cache.
-     * @var boolean
-     */
-    private static $mnm_term_exists;
-    /**
-     * Plugin version.
-     *
-     * @var str
-     */
-    private static $current_version;
-    /**
-     * Plugin DB version.
-     *
-     * @var array
-     */
-    private static $current_db_version;
     /**
      * Hook in tabs.
      */
@@ -2689,30 +2965,6 @@ class WC_MNM_Install
     {
     }
     /**
-     * Add new tables for 2.0.
-     *
-     * @since 2.0.0
-     */
-    private static function create_tables()
-    {
-    }
-    /**
-     * Get table schema.
-     *
-     * @return string
-     */
-    private static function get_schema()
-    {
-    }
-    /**
-     * Reset any notices added to admin.
-     *
-     * @since 2.0.0
-     */
-    private static function remove_admin_notices()
-    {
-    }
-    /**
      * Check version and run the installer if necessary.
      *
      * @since  1.10.0
@@ -2741,20 +2993,6 @@ class WC_MNM_Install
     {
     }
     /**
-     * See if we need to show or run database updates during install.
-     *
-     * @since 2.0.0
-     */
-    private static function maybe_update_db_version()
-    {
-    }
-    /**
-     * Update WC MnM version to current.
-     */
-    private static function update_version()
-    {
-    }
-    /**
      * Get list of DB update callbacks.
      *
      * @since  2.0.0
@@ -2771,12 +3009,6 @@ class WC_MNM_Install
      * @return boolean
      */
     public static function auto_update_enabled()
-    {
-    }
-    /**
-     * Push all needed DB updates to the queue for processing.
-     */
-    private static function update()
     {
     }
     /**
@@ -2815,7 +3047,7 @@ class WC_MNM_Install
     */
     /**
      * Init background updates.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public static function init_background_updater()
@@ -2867,7 +3099,7 @@ class WC_MNM_Install
     }
     /**
      * Force re-start the update cron if everything else fails.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public static function force_update()
@@ -2884,7 +3116,7 @@ class WC_MNM_Install
     }
     /**
      * See if we need to show or run database updates during install.
-     * 
+     *
      * @deprecated 2.0.0
      */
     public static function maybe_update()
@@ -2999,6 +3231,7 @@ class WC_Mix_and_Match_Order
     public static $override_product_from_item_filter = \false;
     /**
      * The single instance of the class.
+     *
      * @var WC_Mix_and_Match_Order
      *
      * @since 1.9.2
@@ -3058,7 +3291,6 @@ class WC_Mix_and_Match_Order
      * Note: Container/child order item totals are calculated without taxes, based on their pricing setup.
      * - Container item totals can be overridden by passing a 'totals' array in $args, as with 'WC_Order::add_product()'.
      * - Child item totals can be overridden in the 'configuration' array, as shown in the example above.
-     *
      *
      * @param  WC_Product_Mix_and_Match  $container
      * @param  WC_Order                 $order
@@ -3168,17 +3400,6 @@ class WC_Mix_and_Match_Order
     {
     }
     /**
-     * Given a virtual MnM container cart item, find if any of its children need processing.
-     *
-     * @since  1.2.0
-     *
-     * @param  array  $item_values
-     * @return mixed
-     */
-    private function mnm_items_need_processing($item_values)
-    {
-    }
-    /**
      * Activates the 'get_product_from_item' filter below.
      *
      * @param  string  $order_id
@@ -3253,7 +3474,7 @@ class WC_MNM_Product_Prices
     /**
      * Returns the incl/excl tax coefficients for calculating prices incl/excl tax on the client side.
      *
-     * @param  WC_Product  $product
+     * @param  WC_Product  $product The product to get ratios for.
      * @return array
      */
     public static function get_tax_ratios($product)
@@ -3335,37 +3556,28 @@ class WC_MNM_Product_Prices
 class WC_Mix_and_Match_Stock_Manager
 {
     /**
-     * The collection of items in the container.
-     * @var str
-     */
-    private $items;
-    /**
-     * Total quantity of items in the container.
-     * @var str
-     */
-    private $total_qty;
-    /**
      * The Mix and Match Product Object.
+     *
      * @var obj WC_Product
      */
     public $product;
-    public function __construct($product)
+    public function __construct(\WC_Product $product)
     {
     }
     /**
      * Add a product to the collection.
      *
-     * @param int          $product_id
-     * @param int    $variation_id
-     * @param int          $quantity
+     * @param WC_MNM_Child_Item $child_item
+     * @param int               $quantity
+     * @param false             $deprecated - formerly quantity.
      */
-    public function add_item($product_id, $variation_id = 0, $quantity = 1)
+    public function add_item($child_item, $quantity = 1, $deprecated = \false)
     {
     }
     /**
      * Return the items of this collection.
      *
-     * @return array
+     * @return WC_Mix_and_Match_Stock_Manager_Product[]
      */
     public function get_items()
     {
@@ -3392,19 +3604,13 @@ class WC_Mix_and_Match_Stock_Manager
      * To validate stock accurately, this method is used to add quantities and build a list of product/variation ids to check.
      * Note that in some cases, stock for a variation might be managed by the parent - this is tracked by the managed_by_id property in WC_Mix_and_Match_Stock_Manager_Item.
      *
-     * @return array
+     * @return array { int $managed_by_id {
+     *      @type WC_Product $product  The product object controlling this item's stock
+     *      @type int        $quantity The selected quantity for this item.
+     *  }
+     * }
      */
     public function get_managed_items()
-    {
-    }
-    /**
-     * Product quantities already in cart.
-     *
-     * @since  1.4.0
-     *
-     * @return array
-     */
-    private function get_quantities_in_cart()
     {
     }
     /**
@@ -3424,43 +3630,69 @@ class WC_Mix_and_Match_Stock_Manager
  * These 2 will differ only if stock for a variation is managed by its parent.
  *
  * @class    WC_Mix_and_Match_Stock_Manager_Item
- * @version  1.0.5
+ *
  * @since    1.0.5
+ * @version  2.4.0
  */
 class WC_Mix_and_Match_Stock_Manager_Item
 {
     /**
-     * Product ID.
+     * Magic getter for old props.
      *
      * @var int
      */
-    public $product_id;
-    /**
-     * Varitation ID.
-     *
-     * @var int
-     */
-    public $variation_id;
-    /**
-     * Quantity of Item in Container.
-     *
-     * @var int
-     */
-    public $quantity;
-    /**
-     * The variation or product ID that manages the stock for this item.
-     *
-     * @var int
-     */
-    public $managed_by_id;
+    public function __get($prop)
+    {
+    }
     /**
      * __construct function.
      *
-     * @param int $product_id
-     * @param int $variation_id
+     * @param WC_MNM_Child_Item $child_item
      * @param int $quantity
+     * @param int $deprecated
      */
-    public function __construct($product_id, $variation_id = 0, $quantity = 1)
+    public function __construct($child_item, $quantity = 1, $deprecated = \false)
+    {
+    }
+    /**
+     * Get the stock managed by ID.
+     *
+     * @return int
+     */
+    public function get_managed_by_id()
+    {
+    }
+    /**
+     * Get the configured quantity.
+     *
+     * @return int
+     */
+    public function get_quantity()
+    {
+    }
+    /**
+     * Get the child item object for this item.
+     *
+     * @return WC_MNM_Child_Item
+     */
+    public function get_child_item()
+    {
+    }
+    /**
+     * Get the product object for this item.
+     *
+     * @return WC_Product}false
+     */
+    public function get_product()
+    {
+    }
+    /**
+     * Get the stock-managed product object for this item.
+     * Mostly it's the same, except when a variation is managed at the parent-product level.
+     *
+     * @return WC_Product|false
+     */
+    public function get_managed_product()
     {
     }
 }
@@ -3520,7 +3752,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Get the product object of one of the child items.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  int      $child_id
@@ -3531,7 +3763,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Is child item available for inclusion in container.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  int  $child_id
@@ -3542,7 +3774,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Get min/max mnm price.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  string $min_or_max
@@ -3553,7 +3785,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Get min/max MnM regular price.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param  string $min_or_max
@@ -3564,7 +3796,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * MnM price including tax.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @return mixed
@@ -3574,7 +3806,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Min/max MnM price excl tax.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @return mixed
@@ -3620,7 +3852,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
      * Returns whether or not the product has any child product.
      *
      * @deprecated 2.0.0
-     * 
+     *
      * @return bool
      */
     public function has_children()
@@ -3630,7 +3862,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
      * Returns whether or not the product container has any available child items.
      *
      * @deprecated 2.0.0
-     * 
+     *
      * @return bool
      */
     public function has_available_children()
@@ -3638,7 +3870,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
     }
     /**
      * Returns whether or not the child products are shipped separately.
-     * 
+     *
      * @deprecated 2.0.0
      *
      * @param string $context
@@ -3652,7 +3884,7 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
      *
      * @since  1.4.0
      * @deprecated 2.0.0
-     * 
+     *
      * @see WC_MNM_Child_Item
      *
      * @param WC_Product $child
@@ -3671,21 +3903,6 @@ class WC_Product_Mix_and_Match_Legacy extends \WC_Product
 class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
 {
     /**
-     * Price-specific data, used to calculate min/max product prices for display and min/max prices incl/excl tax.
-     * @var array
-     */
-    private $pricing_data;
-    /**
-     * Array of container price data for consumption by the front-end script.
-     * @var array
-     */
-    private $container_price_data = array();
-    /**
-     * Array of child item objects.
-     * @var null|WC_MNM_Child_Item[]
-     */
-    private $child_items = \null;
-    /**
      * Child items that need deleting are stored here.
      *
      * @since 2.0.0
@@ -3693,42 +3910,11 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      */
     protected $child_items_to_delete = array();
     /**
-     * Indicates whether child items need saving.
-     * @var array
-     */
-    private $child_items_changed = \false;
-    /**
-     * In per-product pricing mode, the sale status of the product is defined by the children.
-     * @var bool
-     */
-    private $on_sale;
-    /**
-     * True if product data is in sync with children.
-     * @var bool
-     */
-    private $is_synced = \false;
-    /**
-     * Runtime cache for calculated prices.
-     * @var array
-     */
-    private $container_price_cache = array();
-    /**
-     * Layout options data.
-     * @see 'WC_Product_Mix_and_Match::get_layout_options()'.
-     * @var array
-     */
-    private static $layout_options_data = \null;
-    /**
-     * Layout locations data.
-     * @see 'WC_Product_Mix_and_Match::get_add_to_cart_form_location_options()'.
-     * @var array
-     */
-    private static $layout_locations_data = \null;
-    /**
      *  Define type-specific properties.
+     *
      * @var array
      */
-    protected $extra_data = array('min_raw_price' => '', 'min_raw_regular_price' => '', 'max_raw_price' => '', 'max_raw_regular_price' => '', 'layout_override' => \false, 'layout' => 'tabular', 'add_to_cart_form_location' => 'default', 'min_container_size' => 0, 'max_container_size' => \null, 'priced_per_product' => \false, 'discount' => 0, 'packing_mode' => 'together', 'weight_cumulative' => \false, 'content_source' => 'products', 'child_category_ids' => array(), 'child_items_stock_status' => 'outofstock');
+    protected $extended_data = array('min_raw_price' => '', 'min_raw_regular_price' => '', 'max_raw_price' => '', 'max_raw_regular_price' => '', 'layout_override' => \false, 'layout' => 'tabular', 'add_to_cart_form_location' => 'default', 'min_container_size' => 0, 'max_container_size' => \null, 'priced_per_product' => \false, 'discount' => 0, 'packing_mode' => 'together', 'weight_cumulative' => \false, 'content_source' => 'products', 'child_category_ids' => array(), 'child_items_stock_status' => 'outofstock');
     /**
      * __construct function.
      *
@@ -3744,6 +3930,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     */
     /**
      * Get internal type.
+     *
      * @return string
      */
     public function get_type()
@@ -3842,7 +4029,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * @param  string  $context
      * @return string
      */
-    public function get_layout_override($context = 'any')
+    public function get_layout_override($context = 'view')
     {
     }
     /**
@@ -3853,7 +4040,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * @param  string  $context
      * @return string
      */
-    public function get_layout($context = 'any')
+    public function get_layout($context = 'view')
     {
     }
     /**
@@ -3977,6 +4164,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Return the product's maximum size limit.
+     *
      * @param  string $context
      * @return mixed | string or int
      */
@@ -3985,9 +4173,9 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Get child items stock status.
-     * 
+     *
      * @since 2.0.0
-     * 
+     *
      * @param  string $context
      * @return string
      */
@@ -4160,7 +4348,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      *
      * @param  mixed WC_MNM_Child_Item[] | array[]  $data {
      *     @type  int  $product_id     Child product id.
-     *	   @type  int  $variation_id   Child variation id.
+     *     @type  int  $variation_id   Child variation id.
      * }
      */
     public function set_child_items(array $data)
@@ -4168,11 +4356,11 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Set child items stock status.
-     * 
+     *
      * @since 2.0.0
      *
      * @param string  $status - 'instock' | 'onbackorder' | 'outofstock'
-     * 	  'instock'     - Child items stock can fill all slots.
+     *    'instock'     - Child items stock can fill all slots.
      *    'onbackorder' - Child items stock must be backordered to fill all slots.
      *    'outofstock'  - Child items do not have enough stock to fill all slots.
      */
@@ -4206,6 +4394,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Is this a NYP product?
+     *
      * @return bool
      */
     public function is_nyp()
@@ -4215,7 +4404,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * Returns whether or not the product container has any visible child items.
      *
      * @since 2.0.0
-     * 
+     *
      * @param string $context
      * @return bool
      */
@@ -4243,7 +4432,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * Returns whether or not the product container's price is based on the included items.
      *
      * @since  1.4.0
-     * 
+     *
      * @param string $context
      * @return bool
      */
@@ -4254,7 +4443,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * Returns whether or not the child products are shipped as a single unit.
      *
      * @since 2.0.0
-     * 
+     *
      * @param  string  $context
      * @return bool
      */
@@ -4274,7 +4463,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Returns whether container is in stock
-     * 
+     *
      * NB: Child items stock is only checked for the child items on the frontend.
      *
      * @return bool
@@ -4300,9 +4489,9 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     {
     }
     /**
-     * 
-     * Does this product have a layout override 
-     * 
+     *
+     * Does this product have a layout override
+     *
      * @param  string  $context
      *
      * @return bool
@@ -4311,9 +4500,9 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     {
     }
     /**
-     * 
+     *
      * Is this product ID in the allowed contents.
-     * 
+     *
      * @param  mixed WC_Product|int  $id | product or variation ID
      *
      * @return bool
@@ -4327,10 +4516,10 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     |--------------------------------------------------------------------------
     */
     /**
-     * Return array of allowed child product IDs 
+     * Return array of allowed child product IDs
      *
      * @since  2.0.0
-     * 
+     *
      * @return array[] array of child item ID => product|variation ID
      */
     public function get_child_product_ids($context = 'view')
@@ -4341,7 +4530,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * these are the items that are allowed to be in the container
      *
      * @since  2.0.0
-     * 
+     *
      * @return WC_MNM_Child_Item[]
      */
     public function get_child_items($context = 'view')
@@ -4349,7 +4538,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Gets a specific child item.
-     * 
+     *
      * @since  2.0.0
      *
      * @param  int  $child_item_id
@@ -4363,15 +4552,15 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
      * Return a specific child item by product|variation ID.
      *
      * @since  2.0.0
-     * 
+     *
      * @return WC_MNM_Child_Item|false
      */
-    private function get_child_item_by_product_id($child_product_id, $context = 'view')
+    public function get_child_item_by_product_id($child_product_id, $context = 'view')
     {
     }
     /**
      * Adds container configuration data to the URL.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  array|null $item_object item array If a cart or order item is passed, we can get a link containing the exact attributes selected for the variation, rather than the default attributes.
@@ -4472,9 +4661,10 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     /**
      * Get the data attributes
      *
+     * @param array $args
      * @return string
      */
-    public function get_data_attributes()
+    public function get_data_attributes($args = array())
     {
     }
     /**
@@ -4550,9 +4740,9 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     /**
      * Do any extra processing needed after the actual product save
      * (but before triggering the 'woocommerce_after_..._object_save' action)
-     * 
+     *
      * @since 2.0.0
-     * 
+     *
      * @param mixed $state The state object that was returned by before_data_store_save_or_update.
      */
     protected function after_data_store_save_or_update($state)
@@ -4560,7 +4750,7 @@ class WC_Product_Mix_and_Match extends \WC_Product_Mix_and_Match_Legacy
     }
     /**
      * Save all child items which are part of this product.
-     * 
+     *
      * @since 2.0.0
      */
     protected function save_child_items()
@@ -4610,7 +4800,7 @@ class WC_MNM_Deprecated_Filter_Hooks extends \WC_Deprecated_Filter_Hooks
         'wc_mnm_container_max_size' => 'woocommerce_mnm_max_container_size',
         'wc_mnm_container_is_priced_per_product' => 'woocommerce_mnm_priced_per_product',
         'wc_mnm_container_has_discount' => 'woocommerce_mnm_has_discount',
-        //	'wc_mnm_shipped_per_product'                      => 'woocommerce_mnm_shipped_per_product', // Intentionally commented out. Replaced by it's inverse: wc_mnm_container_is_packed_together @see: WC_Product_Mix_and_Match::is_packed_together()
+        // 'wc_mnm_shipped_per_product'                      => 'woocommerce_mnm_shipped_per_product', // Intentionally commented out. Replaced by it's inverse: wc_mnm_container_is_packed_together @see: WC_Product_Mix_and_Match::is_packed_together()
         'wc_mnm_container_is_on_sale' => 'woocommerce_mnm_is_on_sale',
         'wc_mnm_container_empty_price_html' => 'woocommerce_mnm_empty_price_html',
         'wc_mnm_container_show_free_string' => 'woocommerce_mnm_show_free_string',
@@ -4716,6 +4906,13 @@ class WC_MNM_Legacy_Meta
 class WC_MNM_Compatibility
 {
     /**
+     * Define dependencies
+     *
+     * @var array of minimum versions
+     * @since 2.0.0
+     */
+    public $required = array('apfs' => '3.0.0', 'blocks' => '7.2.0', 'subs' => '3.0.0');
+    /**
      * Array of deprecated hook handlers.
      *
      * @var array of WC_Deprecated_Hooks
@@ -4724,6 +4921,7 @@ class WC_MNM_Compatibility
     public $deprecated_hook_handlers = array();
     /**
      * The single instance of the class.
+     *
      * @var WC_MNM_Compatibility
      *
      * @since 1.9.2
@@ -4739,7 +4937,15 @@ class WC_MNM_Compatibility
     public static function get_instance()
     {
     }
-    function __construct()
+    public function __construct()
+    {
+    }
+    /**
+     * Declare HPOS (Custom Order tables) compatibility.
+     *
+     * @since 2.2.0
+     */
+    public function declare_hpos_compatibility()
     {
     }
     /**
@@ -4820,14 +5026,8 @@ class WC_MNM_Theme_Compatibility
 class WC_MNM_Core_Compatibility
 {
     /**
-     * Current REST request.
-     *
-     * @var WP_REST_Request
-     */
-    private static $request;
-    /**
      * Attach any hooks/filters for core WooCommerce
-     * 
+     *
      * @since 2.0.0
      */
     public static function attach_hooks_and_filters()
@@ -4867,7 +5067,7 @@ class WC_MNM_Core_Compatibility
      * Order/Group products by category
      *
      * @since 2.0.0
-     * 
+     *
      * @param string   $orderby The GROUP BY clause of the query.
      * @param WP_Query $query   The WP_Query instance (passed by reference).
      * @return string
@@ -4961,6 +5161,54 @@ class WC_MNM_Core_Compatibility
      * @return boolean
      */
     public static function is_rest_api_request()
+    {
+    }
+    /**
+     * Given an element name, returns a class name.
+     *
+     * If the WP-related function is not defined (added in 6.1), return empty string.
+     *
+     * @param string $element The name of the element.
+     *
+     * @since 2.4.0
+     * @return string
+     */
+    public static function wp_theme_get_element_class_name($element)
+    {
+    }
+    /**
+     * Returns true if site is using block theme.
+     *
+     * @since  2.4.10
+     *
+     * @return boolean
+     */
+    public static function wc_current_theme_is_fse_theme()
+    {
+    }
+    /**
+     *
+     * Gets value of a meta key from WC_Data object if passed, otherwise from the post object.
+     * This helper function support backward compatibility for meta box functions, when moving from posts based store to custom tables.
+     *
+     * @param WP_Post|null  $post Post object, meta will be fetched from this only when `$data` is not passed.
+     * @param \WC_Data|null $data WC_Data object, will be preferred over post object when passed.
+     * @param string        $key Key to fetch metadata for.
+     * @param bool          $single Whether metadata is single.
+     *
+     * @since 2.4.10
+     *
+     * @return array|mixed|string Value of the meta key.
+     */
+    public static function get_post_or_object_meta(?\WP_Post $post, ?\WC_Data $data, string $key, bool $single)
+    {
+    }
+    /**
+     * Wrapper for wc_print_notice
+     *
+     * @since 2.5.0
+     */
+    public static function wc_print_notice($message = '')
     {
     }
     /*
@@ -5201,13 +5449,13 @@ class WC_MNM_APFS_Pricing_Compatibility
     {
     }
     /**
-     * Sub schemes attached on a Product Bundle should not work if the bundle contains a non-convertible product, such as a "legacy" subscription.
+     * Per-item pricing container base prices can be empty strings, which throws notice in Subscriptions.
      */
     public static function add_price_filters($context = '')
     {
     }
     /**
-     * Sub schemes attached on a Product Bundle should not work if the bundle contains a non-convertible product, such as a "legacy" subscription.
+     * Per-item pricing container base prices can be empty strings, which throws notice in Subscriptions.
      */
     public static function remove_price_filters($context = '')
     {
@@ -5220,6 +5468,22 @@ class WC_MNM_APFS_Pricing_Compatibility
      * @return double
      */
     public static function filter_price($price, $product)
+    {
+    }
+    /**
+     * Remove APFS price filters before retrieving the bundled item Regular Price.
+     *
+     * @since 2.3.1
+     */
+    public static function remove_regular_price_filters()
+    {
+    }
+    /**
+     * Re-add APFS price filters after retrieving the bundled item Regular Price.
+     *
+     * @since 2.3.1
+     */
+    public static function add_regular_price_filters()
     {
     }
     /**
@@ -5283,40 +5547,9 @@ class WC_MNM_APFS_Pricing_Compatibility
 class WC_MNM_APFS_Switching_Compatibility
 {
     /**
-     * Runtime cache.
-     *
-     * @var    array
-     */
-    private static $cache = array();
-    /**
      * Hooks for MNM support.
      */
     public static function add_hooks()
-    {
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | Helpers
-    |--------------------------------------------------------------------------
-    */
-    /**
-     * True if there are sub schemes inherited from a container.
-     *
-     * @param  array  $cart_item
-     * @return boolean
-     */
-    private static function has_scheme_data($cart_item)
-    {
-    }
-    /**
-     * Calculates container item subtotals.
-     *
-     * @param  array   $cart_item
-     * @param  string  $scheme_key
-     * @param  string  $tax
-     * @return double
-     */
-    private static function calculate_container_item_subtotal($cart_item, $scheme_key, $tax = '')
     {
     }
     /**
@@ -5363,15 +5596,6 @@ class WC_MNM_APFS_Switching_Compatibility
      * @return void
      */
     public static function apply_child_item_subscription_schemes($cart)
-    {
-    }
-    /**
-     * Copies product schemes to a child product.
-     *
-     * @param  WC_Product  $child_product
-     * @param  WC_Product  $container_product
-     */
-    private static function set_child_product_subscription_schemes($child_product, $container_product)
     {
     }
     /**
@@ -5431,6 +5655,34 @@ class WC_MNM_APFS_Switching_Compatibility
     |--------------------------------------------------------------------------
     */
     /**
+     * Change the switch button text for Mix and Match subscriptions.
+     *
+     * @since 2.1.0
+     *
+     * @param string $switch_link_text The switch link html.
+     * @param int $item_id The order item ID of a subscription line item
+     * @param array $item An order line item
+     * @param object $subscription A WC_Subscription object
+     * @return string
+     */
+    public static function switch_link_text($switch_link_text, $item_id, $item, $subscription)
+    {
+    }
+    /**
+     * Change the switch button text for Mix and Match subscriptions.
+     *
+     * @since 2.0.9
+     *
+     * @param string $switch_link The switch link html.
+     * @param int $item_id The order item ID of a subscription line item
+     * @param array $item An order line item
+     * @param object $subscription A WC_Subscription object
+     * @return string
+     */
+    public static function switch_link($switch_link, $item_id, $item, $subscription)
+    {
+    }
+    /**
      * Don't count container child items and hidden container container/child items.
      *
      * @param  boolean          $can
@@ -5474,13 +5726,21 @@ class WC_MNM_APFS_Switching_Compatibility
     }
     /**
      * Add extra 'Allow Switching' options for content switching of Mix and Match containers
-     * 
+     *
      * @See: 'WCS_ATT_Admin::allow_switching_options'.
      *
      * @param  array  $data
      * @return array
      */
     public static function add_container_switching_options($data)
+    {
+    }
+    /**
+     * Add Switch settings to the Subscription's settings page.
+     *
+     * @since 2.0.9
+     */
+    public static function add_settings($settings)
     {
     }
     /**
@@ -5656,7 +5916,7 @@ class WC_MNM_APFS_Switching_Compatibility
     }
     /**
      * When loading child item's product, always set the active container scheme on the child product.
-     * 
+     *
      * @Note - This is done differently from WCS_ATT_Integration_PB_CP::set_bundled_items_scheme() because in MNM 2.0, $child_item->get_product() returns a cached value of the product object and $child-item->product is private.
      * This make the product object not directly manipulatable on the `wc_mnm_get_child_items` filter the way it is on `woocommerce_bundled_items` for Product Bundles.
      * So we need to manipulate the product object when it initialized, on the `wc_mnm_child_item_product` filter. see WC_MNM_Child_Item::get_product()
@@ -5700,11 +5960,26 @@ class WC_MNM_APFS_Switching_Compatibility
     public static function restore_switch_type($cart)
     {
     }
+    /**
+     * Pass parent scheme meta to children.
+     *
+     * @since 2.3.0
+     *
+     * Use this filter to modify the posted configuration.
+     *
+     * @param  $order_item_args array
+     * @param  $product    WC_Product_Mix_and_Match
+     * @param  $order_item WC_Order_Item
+     * @param  $order      WC_Order
+     */
+    public static function child_item_scheme_meta($order_item_args, $product, $order_item, $order)
+    {
+    }
 }
 /**
  * WooCommerce Blocks Compatibility.
  *
- * @version 2.1.0
+ * @version 2.0.0
  */
 class WC_MNM_Blocks_Compatibility
 {
@@ -5753,7 +6028,7 @@ class WC_MNM_COCART_Compatibility
      * @param  string $product_type      - The product type.
      * @return bool
      */
-    public static function add_to_cart_validation($passed_validation, $product_id, $quantity, $variation_id = '', $variation = array(), $cart_item_data = array(), $product_type)
+    public static function add_to_cart_validation($passed_validation, $product_id, $quantity, $variation_id = '', $variation = array(), $cart_item_data = array(), $product_type = '')
     {
     }
     // END add_to_cart_validation()
@@ -5771,6 +6046,8 @@ class WC_MNM_COCART_Compatibility
      * Validates add to cart for MNM containers.
      *
      * Basically ensures that stock for all child products exists before attempting to add them to cart.
+     *
+     * @deprecated 2.2.0
      *
      * @throws CoCart_Data_Exception Exception if invalid data is detected.
      *
@@ -6022,17 +6299,19 @@ class WC_MNM_COG_Compatibility
 /**
  * Min/Max Quantities Compatibility.
  *
- * @version  1.10.6
+ * @version  2.0.7
  */
 class WC_MNM_Min_Max_Compatibility
 {
     /**
      * The child item object whose qty input is being filtered.
+     *
      * @var WC_MNM_Child_Item
      */
     public static $child_item = \false;
     /**
      * Unfiltered quantity input data used at restoration time.
+     *
      * @var array
      */
     public static $unfiltered_args = \false;
@@ -6162,13 +6441,41 @@ class WC_MNM_Min_Max_Compatibility
     {
     }
     /**
-     * Apply min/max/step to variations.
+     * Apply min/max/step to all child products.
+     * Unfortunately, applying to the products means ultimately we check the meta twice (here and then again by MMQ in the woocommerce_quantity_input_args filter)
+     * But this ensure we validate properly on add to cart instead of only relying on the input limits.
      *
-     * @since  1.11.0
+     * @since  2.0.7
      * @param  string  $qty
      * @param  WC_MNM_Child_Item  $child_item
      * @param obj $container WC_Product_Mix_and_Match of parent container.
      * @return string
+     */
+    public static function child_item_quantity_limits($qty, $child_item, $container_product)
+    {
+    }
+    /**
+     * If this is a MNM child item, don't use Group as for our minimum or initial value.
+     *
+     * @since 2.0.7
+     *
+     * @param boolean $use_group Whether to use group quantity as minimum. Default true.
+     * @param object  $product   Product object.
+     * @param array   $data      Available product data.
+     * @return boolean
+     */
+    public static function skip_group_for_child_items($use_group, $product, $data)
+    {
+    }
+    /*
+    	-----------------------------------------------------------------*/
+    /*
+    		Deprecated    .                                                */
+    /*-----------------------------------------------------------------*/
+    /**
+     * Apply min/max/step to variations.
+     *
+     * @deprecated 2.0.7
      */
     public static function variation_inputs($qty, $child_item, $container_product)
     {
@@ -6185,12 +6492,21 @@ class WC_MNM_OPC_Compatibility
     {
     }
     /**
-     * OPC Single-product bundle-type add-to-cart template.
+     * OPC Single-product mix and match add-to-cart template.
      *
      * @param  int  $opc_post_id
      * @return void
      */
     public static function opc_single_add_to_cart_mnm($opc_post_id)
+    {
+    }
+    /**
+     * OPC Single-product mix and match type "after_summary" add-to-cart template.
+     *
+     * @param  int  $opc_post_id
+     * @return void
+     */
+    public static function opc_add_to_cart_after_summary()
     {
     }
     /**
@@ -6239,14 +6555,10 @@ class WC_MNM_PIP_Compatibility
 {
     /**
      * The document being processed.
+     *
      * @var WC_PIP_Document
      */
     public static $document;
-    /**
-     * Flag to control internal flow in 'items_count'.
-     * @var bool
-     */
-    private static $recounting_items = \false;
     /**
      * Add hooks.
      */
@@ -6343,7 +6655,7 @@ class WC_MNM_PIP_Compatibility
     {
     }
     /**
-     * Add 'bundled-product' class to pip row classes.
+     * Add 'mnm-child-item' class to pip row classes.
      *
      * @param  array       $classes
      * @param  WC_Product  $product
@@ -6390,6 +6702,7 @@ class WC_MNM_PIP_Compatibility
     }
     /**
      * Add bundled item class CSS rule.
+     *
      * @return  void
      */
     public static function add_styles()
@@ -6403,17 +6716,6 @@ class WC_MNM_PIP_Compatibility
  */
 class WC_MNM_PnR_Compatibility
 {
-    /**
-     * MnM points - @see 'WC_MNM_PnR_Compatibility::replace_points'.
-     * @var mixed
-     */
-    private static $mnm_price_max = \false;
-    private static $mnm_price_min = \false;
-    /**
-     * Bypass 'wc_points_rewards_single_product_message' filter.
-     * @var bool
-     */
-    private static $single_product_message_filter_active = \true;
     /*
      * Initialize.
      */
@@ -6461,15 +6763,6 @@ class WC_MNM_PnR_Compatibility
      * @return mixed
      */
     public static function replace_price($price, $product)
-    {
-    }
-    /**
-     * True if the MnM bundle has fixed product- or category-level points.
-     *
-     * @param  WC_Product  $product
-     * @return bool
-     */
-    private static function has_fixed_points($product)
     {
     }
 }
@@ -6532,7 +6825,7 @@ class WC_MNM_Quick_View_Compatibility
     }
     /**
      * Set form location prop to default in QV
-     * 
+     *
      * @param string $location
      * @return string
      */
@@ -6664,8 +6957,6 @@ class WC_MNM_WL_Compatibility
 }
 /**
  * WC_MNM_Astra_Compatibility Class.
- *
- * @version  2.0.0
  */
 class WC_MNM_Astra_Compatibility
 {
@@ -6688,6 +6979,44 @@ class WC_MNM_Astra_Compatibility
      * Add theme-specific style rules to header.
      */
     public static function inline_styles()
+    {
+    }
+    /**
+     * Add theme-specific style rules to header.
+     *
+     * @since 2.4.5
+     */
+    public static function init_quick_view()
+    {
+    }
+    /**
+     * Add filter on the form location prop
+     *
+     * @since 2.4.5
+     */
+    public static function attach_hooks()
+    {
+    }
+    /**
+     * Set form location prop to default in QV
+     *
+     * @since 2.4.5
+     *
+     * @param string $location
+     * @return string
+     */
+    public static function filter_form_location($location)
+    {
+    }
+    /**
+     * Force use of Astra plus/minus buttons
+     *
+     * @since 2.4.9
+     *
+     * @param string $value
+     * @return string
+     */
+    public static function filter_plus_minus_buttons($value)
     {
     }
 }
@@ -6758,9 +7087,88 @@ class WC_MNM_Avada_Compatibility
     }
 }
 /**
+ * WC_MNM_Flatsome_Compatibility Class.
+ */
+class WC_MNM_Flatsome_Compatibility
+{
+    /**
+     * Attach hooks and filters.
+     */
+    public static function init()
+    {
+    }
+    /**
+     * Add theme-specific wrapper classes to Mix and Match grid wrapper.
+     *
+     * @param  array     $classes - All classes on the wrapper container.
+     * @param obj $product WC_Mix_And_Match of parent product
+     * @return array
+     */
+    public static function loop_classes($classes, $product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper classes to child items.
+     *
+     * @param  array     $classes - All classes on the wrapper container.
+     * @param  obj $child_item WC_MNM_Child_Item
+     * @param obj $product WC_Mix_And_Match of parent product
+     * @return array
+     */
+    public static function child_item_classes($classes, $child_item, $product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper.
+     *
+     * @param obj WC_Product $child_product the child product
+     * @param obj WC_Mix_and_Match $container_product the parent container
+     */
+    public static function entry_wrap_open($child_product, $container_product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper.
+     *
+     * @param obj WC_Product $child_product the child product
+     * @param obj WC_Mix_and_Match $container_product the parent container
+     */
+    public static function entry_wrap_close($child_product, $container_product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper.
+     *
+     * @param obj WC_Product $child_product the child product
+     * @param obj WC_Mix_and_Match $container_product the parent container
+     */
+    public static function image_wrap_close($child_product, $container_product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper.
+     *
+     * @since 2.3.0
+     *
+     * @param string
+     * @param obj WC_MNM_Child_Item $child_item
+     * @param obj WC_Mix_and_Match $container_product the parent container
+     * @return string
+     */
+    public static function child_item_image_html($html, $child_item, $container_product)
+    {
+    }
+    /**
+     * Add theme-specific styles.
+     */
+    public static function inline_style()
+    {
+    }
+}
+/**
  * WC_MNM_OceanWP_Compatibility Class.
  *
- * @version  2.0.0
+ * @version  2.0.8
  */
 class WC_MNM_OceanWP_Compatibility
 {
@@ -6774,9 +7182,10 @@ class WC_MNM_OceanWP_Compatibility
      * Add theme-specific wrapper classes to loop.
      *
      * @param  array     $classes - All classes on the wrapper container.
+     * @param obj $product WC_Mix_And_Match of parent product
      * @return array
      */
-    public static function loop_classes($classes)
+    public static function loop_classes($classes, $product)
     {
     }
     /**
@@ -6787,9 +7196,72 @@ class WC_MNM_OceanWP_Compatibility
     }
 }
 /**
+ * WC_MNM_Storefront_Compatibility Class.
+ */
+class WC_MNM_Storefront_Compatibility
+{
+    /**
+     * Attach hooks and filters.
+     */
+    public static function init()
+    {
+    }
+    /**
+     * Add theme-specific style rules to product post class.
+     */
+    public static function add_filters()
+    {
+    }
+    /**
+     * Remove theme-specific style rules.
+     */
+    public static function remove_filters()
+    {
+    }
+    /**
+     * Add theme-specific classes to post.
+     *
+     * @param array      $classes Array of CSS classes.
+     * @return array
+     */
+    public static function post_class($classes)
+    {
+    }
+}
+/**
+ * WC_MNM_Woodmart_Compatibility Class.
+ */
+class WC_MNM_Woodmart_Compatibility
+{
+    /**
+     * Attach hooks and filters.
+     */
+    public static function init()
+    {
+    }
+    /**
+     * Add theme-specific wrapper classes to Mix and Match grid wrapper.
+     *
+     * @param  array     $classes - All classes on the wrapper container.
+     * @param obj $product WC_Mix_And_Match of parent product
+     * @return array
+     */
+    public static function loop_classes($classes, $product)
+    {
+    }
+    /**
+     * Add theme-specific wrapper classes to child items.
+     *
+     * @param  array     $classes - All classes on the wrapper container.
+     * @param obj $product WC_Mix_And_Match of parent product
+     * @return array
+     */
+    public static function child_item_classes($classes, $product)
+    {
+    }
+}
+/**
  * WC_MNM_X_Compatibility Class.
- *
- * @version  2.0.0
  */
 class WC_MNM_X_Compatibility
 {
@@ -6833,6 +7305,7 @@ class WC_MNM_Customizer
 {
     /**
      * The single instance of the class.
+     *
      * @var WC_MNM_Customizer
      */
     protected static $_instance = \null;
@@ -6878,25 +7351,26 @@ class WC_MNM_Customizer
      *
      * FSE themes hide the "Customize" link in the Appearance menu. In Mix and Match we have several options that can currently
      * only be edited via the Customizer. For now, we are thus adding a new link for Mix and Match specific Customizer options.
-     * 
+     *
      * @since 2.0.0
      */
     public function add_fse_customize_link()
     {
     }
     /**
-     * Get recent MNM product ID.
-     * 
-     * @return int
+     * No per-product overrides allowed when viewing customizer
+     *
+     * @param bool
+     *
+     * @since 2.3.0
      */
-    private function get_preview_page_id()
+    public function disable_override($override)
     {
     }
 }
 class KIA_Customizer_Radio_Image_Control extends \WP_Customize_Control
 {
     public $type = 'kia-radio-image';
-    private $version = '1.0.1';
     /**
      * Enqueue scripts/styles.
      */
@@ -6925,21 +7399,10 @@ class KIA_Customizer_Radio_Image_Control extends \WP_Customize_Control
     public static function sanitize($value, $setting)
     {
     }
-    /**
-     * Plugin / theme agnostic path to URL
-     *
-     * @see https://wordpress.stackexchange.com/a/264870/14546
-     * @param string $path  file path
-     * @return string       URL
-     */
-    private function abs_path_to_url($path = '')
-    {
-    }
 }
 class KIA_Customizer_Range_Control extends \WP_Customize_Control
 {
     public $type = 'kia-range';
-    private $version = '1.0.1';
     /**
      * Enqueue scripts/styles.
      */
@@ -6967,23 +7430,12 @@ class KIA_Customizer_Range_Control extends \WP_Customize_Control
      * @see    WP_Customize_Control::print_template()
      */
     protected function content_template()
-    {
-    }
-    /**
-     * Plugin / theme agnostic path to URL
-     *
-     * @see https://wordpress.stackexchange.com/a/264870/14546
-     * @param string $path  file path
-     * @return string       URL
-     */
-    private function abs_path_to_url($path = '')
     {
     }
 }
 class KIA_Customizer_Toggle_Control extends \WP_Customize_Control
 {
     public $type = 'kia-toggle';
-    private $version = '1.0.1';
     /**
      * Enqueue scripts/styles.
      */
@@ -7011,16 +7463,6 @@ class KIA_Customizer_Toggle_Control extends \WP_Customize_Control
      * @see    WP_Customize_Control::print_template()
      */
     protected function content_template()
-    {
-    }
-    /**
-     * Plugin / theme agnostic path to URL
-     *
-     * @see https://wordpress.stackexchange.com/a/264870/14546
-     * @param string $path  file path
-     * @return string       URL
-     */
-    private function abs_path_to_url($path = '')
     {
     }
     /**
@@ -7049,7 +7491,7 @@ class WC_MNM_Child_Item_Data_Store
     */
     /**
      * Create a new child item in database.
-     * 
+     *
      * @param WC_MNM_Child_Item $child_item child item object.
      */
     public function create(&$child_item)
@@ -7065,7 +7507,7 @@ class WC_MNM_Child_Item_Data_Store
     }
     /**
      * Update data in the database.
-     * 
+     *
      * @param WC_MNM_Child_Item $child_item child item object.
      */
     public function update(&$child_item)
@@ -7073,7 +7515,7 @@ class WC_MNM_Child_Item_Data_Store
     }
     /**
      * Delete data from the database.
-     * 
+     *
      * @param WC_MNM_Child_Item $child_item child item object.
      */
     public function delete(&$child_item)
@@ -7090,7 +7532,7 @@ class WC_MNM_Child_Item_Data_Store
     }
     /**
      * Clear cache.
-     * 
+     *
      * @param WC_MNM_Child_Item $child_item child item object.
      */
     protected function clear_caches($child_item)
@@ -7138,7 +7580,7 @@ class WC_MNM_DB_Sync
     {
     }
     /**
-     * Deletes bundled item DB entries when their container product is deleted.
+     * Deletes child item DB entries when their container product is deleted.
      *
      * @param  mixed  $id  ID of post being deleted.
      */
@@ -7246,7 +7688,7 @@ class WC_Product_MNM_Data_Store_CPT extends \WC_Product_Data_Store_CPT
     }
     /**
      * Reads the child contents from the DB.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  int|WC_Product_Mix_and_Match  $product
@@ -7257,18 +7699,19 @@ class WC_Product_MNM_Data_Store_CPT extends \WC_Product_Data_Store_CPT
     }
     /**
      * Reads the allowed contents from the DB.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  int|WC_Product_Mix_and_Match  $product
-     * @return array() - map of child item ids => child product ids
+     * @param string $return Format of returned data, values: 'ids'|'array'
+     * @return array() - map of [ child item ids => child product ids ] OR map of full props ex: [ child item ids => [ child_item_id, p_id, product_id, variation_id, container_id, menu_order ] ]
      */
-    public function query_child_items_by_container($product)
+    public function query_child_items_by_container($product, $return = 'ids')
     {
     }
     /**
      * Reads the allowed contents from the DB.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  WC_Product_Mix_and_Match  $product
@@ -7279,7 +7722,7 @@ class WC_Product_MNM_Data_Store_CPT extends \WC_Product_Data_Store_CPT
     }
     /**
      * Find the MNM products a product belongs to.
-     * 
+     *
      * @since 2.0.0
      *
      * @param  int|WC_Product  $product
@@ -7298,6 +7741,38 @@ class WC_Product_MNM_Data_Store_CPT extends \WC_Product_Data_Store_CPT
     {
     }
 }
+/*
+|--------------------------------------------------------------------------
+| Admin functions.
+|--------------------------------------------------------------------------
+*/
+/**
+ * Output a radio image input box.
+ *
+ * @param array   $field Field data.
+ * @param WC_Data $data WC_Data object, will be preferred over post object when passed.
+ */
+function wc_mnm_wp_radio_images($field, \WC_Data $data = \null)
+{
+}
+/**
+ * Output a toggle checkbox input box.
+ *
+ * @param array   $field Field data.
+ * @param WC_Data $data WC_Data object, will be preferred over post object when passed.
+ */
+function wc_mnm_wp_toggle($field, \WC_Data $data = \null)
+{
+}
+/**
+ * Output a enhanced select input box. Defaults to a product search, very specific to the plugin and not a generic function for any kind of enhanced search.
+ * WC_Data object is not used here since the "value" param must be formatted a specific way.
+ *
+ * @param array   $field Field data.
+ */
+function wc_mnm_wp_enhanced_select($field)
+{
+}
 /**
  * Returns the main instance of WC_Mix_and_Match to prevent the need to use globals.
  *
@@ -7306,9 +7781,11 @@ class WC_Product_MNM_Data_Store_CPT extends \WC_Product_Data_Store_CPT
 function WC_Mix_and_Match()
 {
 }
-/*---------------*/
-/*  Frontend.    */
-/*---------------*/
+/*
+|--------------------------------------------------------------------------
+| Frontend.
+|--------------------------------------------------------------------------
+*/
 /**
  * Get a name prefix for quantity input.
  *
@@ -7326,23 +7803,25 @@ function wc_mnm_get_child_input_name($container_id, $child_id = \null)
  *
  * @since  1.2.0
  *
- * @param  obj    $container WC_Product_Mix_and_Match
+ * @param  obj $container WC_Product_Mix_and_Match.
  * @return string
  */
 function wc_mnm_get_quantity_message($container)
 {
 }
-/*---------------*/
-/*  Cart.        */
-/*---------------*/
+/*
+---------------
+	Cart.
+---------------
+*/
 /**
  * Given a child MnM cart item, find and return its container cart item or its cart ID when the $return_id arg is true.
  *
  * @since  1.7.0
  *
- * @param  array $child_cart_item
- * @param  array $cart_contents
- * @param  bool  $return_id
+ * @param  array $child_cart_item The child item cart array.
+ * @param  array $cart_contents The array of all items currently in cart.
+ * @param  bool  $return_id Toggle between returning cart item key or the entire item array.
  * @return mixed
  */
 function wc_mnm_get_cart_item_container($child_cart_item, $cart_contents = \false, $return_id = \false)
@@ -7353,10 +7832,10 @@ function wc_mnm_get_cart_item_container($child_cart_item, $cart_contents = \fals
  *
  * @since  1.7.0
  *
- * @param  array    $container_cart_item
- * @param  array    $cart_contents
- * @param  bool  $return_ids
- * @return array Either cart items or their cart keys depending on if the $return_ids arg is true
+ * @param  array $container_cart_item The parent item cart array.
+ * @param  array $cart_contents The array of all items currently in cart.
+ * @param  bool  $return_ids Toggle between returning cart item key or the entire item array.
+ * @return array Either cart items or their cart keys.
  */
 function wc_mnm_get_child_cart_items($container_cart_item, $cart_contents = \false, $return_ids = \false)
 {
@@ -7367,8 +7846,8 @@ function wc_mnm_get_child_cart_items($container_cart_item, $cart_contents = \fal
  *
  * @since  1.7.0
  *
- * @param  array  $cart_item
- * @param  array  $cart_contents
+ * @param  array $cart_item Cart item array to test.
+ * @param  array $cart_contents The array of all items currently in cart.
  * @return bool
  */
 function wc_mnm_is_child_cart_item($cart_item, $cart_contents = \false)
@@ -7380,7 +7859,7 @@ function wc_mnm_is_child_cart_item($cart_item, $cart_contents = \false)
  *
  * @since  1.7.0
  *
- * @param  array  $cart_item
+ * @param  array $cart_item Cart item array to test.
  * @return bool
  */
 function wc_mnm_maybe_is_child_cart_item($cart_item)
@@ -7391,23 +7870,25 @@ function wc_mnm_maybe_is_child_cart_item($cart_item)
  *
  * @since  1.7.0
  *
- * @param  array  $cart_item
+ * @param  array $cart_item Cart item array to test.
  * @return bool
  */
 function wc_mnm_is_container_cart_item($cart_item)
 {
 }
-/*---------------*/
-/*  Orders.      */
-/*---------------*/
+/*
+|--------------------------------------------------------------------------
+| Orders.
+|--------------------------------------------------------------------------
+*/
 /**
  * Given a MnM child order item, find and return its container order item or its order item ID when the $return_id arg is true.
  *
  * @since  1.7.0
  *
- * @param  array     $child_order_item
- * @param  mixed     array|object $order array of order items or WC_Order
- * @param  bool      $return_id
+ * @param array              $child_order_item Order item to test.
+ * @param mixed array|object $order array of order items or WC_Order.
+ * @param bool               $return_id Either order item or the order item ID.
  * @return mixed
  */
 function wc_mnm_get_order_item_container($child_order_item, $order = \false, $return_id = \false)
@@ -7418,9 +7899,9 @@ function wc_mnm_get_order_item_container($child_order_item, $order = \false, $re
  *
  * @since  1.7.0
  *
- * @param  array        $container_order_item
- * @param  array|object $order array of order items or WC_Order
- * @param  bool         $return_ids
+ * @param  array        $container_order_item Order item to test.
+ * @param  array|object $order array of order items or WC_Order.
+ * @param  bool         $return_ids Either order items or the order item IDs.
  * @return mixed
  */
 function wc_mnm_get_child_order_items($container_order_item, $order = \false, $return_ids = \false)
@@ -7432,8 +7913,8 @@ function wc_mnm_get_child_order_items($container_order_item, $order = \false, $r
  *
  * @since  1.7.0
  *
- * @param  array     $order_item
- * @param  mixed     array|object $order array of order items or WC_Order
+ * @param  mixed     array|WC_Order_Item $order_item  Order item to test.
+ * @param  mixed     array|WC_Order_Item $order array of order items or WC_Order.
  * @return bool
  */
 function wc_mnm_is_child_order_item($order_item, $order = \false)
@@ -7445,7 +7926,7 @@ function wc_mnm_is_child_order_item($order_item, $order = \false)
  *
  * @since  1.7.0
  *
- * @param  array  $order_item
+ * @param  mixed array|WC_Order_Item $order_item Order item to test.
  * @return bool
  */
 function wc_mnm_maybe_is_child_order_item($order_item)
@@ -7456,10 +7937,42 @@ function wc_mnm_maybe_is_child_order_item($order_item)
  *
  * @since  1.7.0
  *
- * @param  array  $order_item
+ * @param  mixed array|WC_Order_Item $order_item Order item to test.
  * @return bool
  */
 function wc_mnm_is_container_order_item($order_item)
+{
+}
+/*
+|--------------------------------------------------------------------------
+| Products.
+|--------------------------------------------------------------------------
+*/
+/**
+ * Given a product, test if a Mix and Match container type.
+ *
+ * @since  2.2.0
+ *
+ * @param  mixed string|WC_Product $product - A product object or product type.
+ * @return bool
+ */
+function wc_mnm_is_product_container_type($product)
+{
+}
+/*
+|--------------------------------------------------------------------------
+| Formatting.
+|--------------------------------------------------------------------------
+*/
+/**
+ * Given an array, prefix all keys with data-
+ *
+ * @since  2.3.0
+ *
+ * @param  array $attributes Data attributes to prefix with data-*.
+ * @return array
+ */
+function wc_mnm_prefix_data_attribute_keys($attributes)
 {
 }
 /*
@@ -7473,9 +7986,9 @@ function wc_mnm_is_container_order_item($order_item)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array    $child_cart_item
- * @param  array    $cart_contents
- * @param  bool  $return_id
+ * @param  array $child_cart_item The child item cart array.
+ * @param  array $cart_contents The array of all items currently in cart.
+ * @param  bool  $return_id Toggle between returning cart item key or the entire item array.
  * @return mixed
  */
 function wc_mnm_get_mnm_cart_item_container($child_cart_item, $cart_contents = \false, $return_id = \false)
@@ -7487,9 +8000,9 @@ function wc_mnm_get_mnm_cart_item_container($child_cart_item, $cart_contents = \
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array    $container_cart_item
- * @param  array    $cart_contents
- * @param  bool  $return_ids
+ * @param  array $container_cart_item The parent item cart array.
+ * @param  array $cart_contents The array of all items currently in cart.
+ * @param  bool  $return_ids Toggle between returning cart item key or the entire item array.
  * @return mixed
  */
 function wc_mnm_get_mnm_cart_items($container_cart_item, $cart_contents = \false, $return_ids = \false)
@@ -7502,8 +8015,8 @@ function wc_mnm_get_mnm_cart_items($container_cart_item, $cart_contents = \false
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array  $cart_item
- * @param  array  $cart_contents
+ * @param  array $cart_item Cart item array to test.
+ * @param  array $cart_contents The array of all items currently in cart.
  * @return bool
  */
 function wc_mnm_is_mnm_cart_item($cart_item, $cart_contents = \false)
@@ -7516,7 +8029,7 @@ function wc_mnm_is_mnm_cart_item($cart_item, $cart_contents = \false)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array  $cart_item
+ * @param  array $cart_item Cart item array to test.
  * @return bool
  */
 function wc_mnm_maybe_is_mnm_cart_item($cart_item)
@@ -7528,7 +8041,7 @@ function wc_mnm_maybe_is_mnm_cart_item($cart_item)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array  $cart_item
+ * @param  array $cart_item Cart item array to test.
  * @return bool
  */
 function wc_mnm_is_mnm_container_cart_item($cart_item)
@@ -7540,9 +8053,9 @@ function wc_mnm_is_mnm_container_cart_item($cart_item)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array     $child_order_item
- * @param  mixed     array|object $order array of order items or WC_Order
- * @param  bool      $return_id
+ * @param array              $child_order_item Order item to test.
+ * @param mixed array|object $order array of order items or WC_Order.
+ * @param bool               $return_id Either order item or the order item ID.
  * @return mixed
  */
 function wc_mnm_get_mnm_order_item_container($child_order_item, $order = \false, $return_id = \false)
@@ -7554,9 +8067,9 @@ function wc_mnm_get_mnm_order_item_container($child_order_item, $order = \false,
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array        $container_order_item
- * @param  array|object $order array of order items or WC_Order
- * @param  bool         $return_ids
+ * @param  array        $container_order_item Order item to test.
+ * @param  array|object $order array of order items or WC_Order.
+ * @param  bool         $return_ids Either order items or the order item IDs.
  * @return mixed
  */
 function wc_mnm_get_mnm_order_items($container_order_item, $order = \false, $return_ids = \false)
@@ -7569,8 +8082,8 @@ function wc_mnm_get_mnm_order_items($container_order_item, $order = \false, $ret
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array     $order_item
- * @param  mixed     array|object $order array of order items or WC_Order
+ * @param  mixed     array|WC_Order_Item $order_item  Order item to test.
+ * @param  mixed     array|WC_Order_Item $order array of order items or WC_Order.
  * @return bool
  */
 function wc_mnm_is_mnm_order_item($order_item, $order = \false)
@@ -7583,7 +8096,7 @@ function wc_mnm_is_mnm_order_item($order_item, $order = \false)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array  $order_item
+ * @param  mixed array|WC_Order_Item $order_item Order item to test.
  * @return bool
  */
 function wc_mnm_maybe_is_mnm_order_item($order_item)
@@ -7595,7 +8108,7 @@ function wc_mnm_maybe_is_mnm_order_item($order_item)
  * @since  1.2.0
  * @deprecated 1.7.0
  *
- * @param  array  $order_item
+ * @param  mixed array|WC_Order_Item $order_item Order item to test.
  * @return bool
  */
 function wc_mnm_is_mnm_container_order_item($order_item)
@@ -7607,15 +8120,29 @@ function wc_mnm_is_mnm_container_order_item($order_item)
  * @since  1.4.0
  * @deprecated 2.0.0
  *
- * @param  WC_Product  $product
+ * @param  WC_Product $product The product to get ratios for.
  * @return array
  */
 function wc_mnm_get_tax_ratios($product)
 {
 }
-/*--------------------------------------------------------*/
-/*  Mix and Match single product template functions     */
-/*--------------------------------------------------------*/
+/*
+|--------------------------------------------------------------------------
+| Mix and Match single product template functions.
+|--------------------------------------------------------------------------
+*/
+/**
+ * Checks whether this product is rendered using a legacy template; an indication that a classic theme is in use.
+ * Although a legacy PHP template might be in use with a block theme (via the "Legacy PHP Product Block", the extension does not account for this scenario when gating template features.
+ *
+ * @since  2.4.10
+ *
+ * @param  WC_Product  $product
+ * @return boolean
+ */
+function wc_mnm_has_legacy_product_template($product)
+{
+}
 /**
  * Add-to-cart template for Mix and Match. Handles the 'Form location > After summary' case.
  *
@@ -7628,10 +8155,21 @@ function wc_mnm_template_add_to_cart_after_summary()
  * Add-to-cart template for Mix and Match products.
  *
  * @since  1.3.0
- * 
- * @param WC_Product_Mix_and_Match $product - Optionally call template for a specific product. Since 1.11.7
+ *
+ * @param WC_Product_Mix_and_Match $container - Optionally call template for a specific product. Since 1.11.7
  */
 function wc_mnm_template_add_to_cart($container = \false)
+{
+}
+/**
+ * Build form classes.
+ *
+ * @since  2.4.0
+ *
+ * @param WC_Product_Mix_and_Match $product
+ * @return array
+ */
+function wc_mnm_get_form_classes($classes = array(), $product = \false)
 {
 }
 /**
@@ -7682,6 +8220,17 @@ function wc_mnm_template_child_item_thumbnail($child_item, $product)
 {
 }
 /**
+ * Close the thumbnail section.
+ *
+ * @since 2.2.0
+ *
+ * @param obj WC_MNM_Child_Item $child_item of child item
+ * @param obj WC_Mix_and_Match $product the parent container
+ */
+function wc_mnm_template_child_item_thumbnail_close($child_item, $product)
+{
+}
+/**
  * Add a 'details' sub-section.
  *
  * @param obj WC_MNM_Child_Item $child_item of child item
@@ -7701,8 +8250,8 @@ function wc_mnm_template_child_item_title($child_item, $product)
 }
 /**
  * Get the MNM item product's hidden data attributes
- * 
- * @todo: eventually deprecate. All data attributes will be on the opening element. 
+ *
+ * @todo: eventually deprecate. All data attributes will be on the opening element.
  * @see: WC_MNM_Child_Item::get_data_attributes()
  * @see: grid/mnm-child-item-wrapper-open.php and table/mnm-child-item-wrapper-open.php templates
  *
@@ -7729,6 +8278,20 @@ function wc_mnm_template_child_item_attributes($child_item, $product)
  * @since  1.4.0
  */
 function wc_mnm_template_child_item_price($child_item, $product)
+{
+}
+/**
+ * Get the MNM item product's remaining stock text.
+ *
+ * Since "out of stock" and "Temporarily unavailable" are also printed by the get_availability_html() method
+ * We need to separate this part out into it's own template function.
+ *
+ * @since 2.3.0
+ *
+ * @param obj WC_MNM_Child_Item $child_item of child item
+ * @param obj WC_Mix_and_Match $product the parent container
+ */
+function wc_mnm_template_child_item_stock_remaining($child_item, $product)
 {
 }
 /**
@@ -7779,13 +8342,16 @@ function wc_mnm_template_child_items_wrapper_close($product)
 }
 /**
  * Add the MNM reset link
+ *
  * @since  1.3.0
  */
-function wc_mnm_template_reset_link()
+function wc_mnm_template_reset_link($product)
 {
 }
 /**
  * Get the Add to Cart button wrap.
+ *
+ * @deprecated 2.2.0
  *
  * @param obj WC_Mix_and_Match product of parent product
  */
@@ -7793,8 +8359,28 @@ function wc_mnm_template_add_to_cart_wrap($product)
 {
 }
 /**
+ * Get the validation status template. (replacing wc_mnm_template_add_to_cart_wrap() but similar)
+ *
+ * @since 2.2.0
+ *
+ * @param obj WC_Mix_and_Match product of parent product
+ */
+function wc_mnm_template_container_status($product)
+{
+}
+/**
+ * Get the purchasable notice.
+ *
+ * @since 2.5.0
+ *
+ * @param obj WC_Mix_and_Match product of parent product
+ */
+function wc_mnm_template_get_purchasable_notice($product)
+{
+}
+/**
  * Get the Add to Cart button.
- * 
+ *
  * @since 2.0.0
  *
  * @param obj WC_Mix_and_Match product of parent product
@@ -7803,17 +8389,56 @@ function wc_mnm_template_add_to_cart_button($product)
 {
 }
 /**
-* Display Mix and Match child product short description
-*
-* @param obj WC_MNM_Child_Item $child_item of child item
-* @param obj WC_Mix_and_Match $product the parent container
-*/
+ * Display Mix and Match child product short description
+ *
+ * @param obj WC_MNM_Child_Item $child_item of child item
+ * @param obj WC_Mix_and_Match $product the parent container
+ */
 function wc_mnm_child_item_short_description($child_item, $product)
 {
 }
-/*-----------------------------------------------------------------------------------*/
-/* Backcompatibility Functions */
-/*-----------------------------------------------------------------------------------*/
+/*
+|--------------------------------------------------------------------------
+| Plus/Minus Buttons
+|--------------------------------------------------------------------------
+*/
+/**
+ * Hook plus/minus buttons only in MNM context
+ *
+ * @since  2.4.0
+ */
+function wc_mnm_add_plus_minus_buttons()
+{
+}
+/**
+ * Unhook plus/minus buttons
+ *
+ * @since  2.4.0
+ */
+function wc_mnm_remove_plus_minus_buttons()
+{
+}
+/**
+ * Minus Button
+ *
+ * @since  2.4.0
+ */
+function wc_mnm_template_quantity_minus_button()
+{
+}
+/**
+ * Plus Button
+ *
+ * @since  2.4.0
+ */
+function wc_mnm_template_quantity_plus_button()
+{
+}
+/*
+|--------------------------------------------------------------------------
+| Backcompatibility functions.
+|--------------------------------------------------------------------------
+*/
 /**
  * Load backcompatibility functions uniquely on woocommerce_mix-and-match_add_to_cart hook.
  */
@@ -7869,7 +8494,7 @@ function woocommerce_template_mnm_product_quantity($child_item, $product)
  *
  * @since  1.8.0
  * @deprecated 2.0.0
- * 
+ *
  * @param obj $product WC_Mix_And_Match of parent product
  */
 function woocommerce_mnm_content_loop($product)
@@ -7879,7 +8504,7 @@ function woocommerce_mnm_content_loop($product)
  * The first catagory caption.
  *
  * @since 2.0.0
- * 
+ *
  * @param obj $child_item WC_MNM_Child_Item
  * @param obj $product WC_Mix_And_Match of parent product
  */
@@ -7887,18 +8512,53 @@ function wc_mnm_category_caption($child_item, $product)
 {
 }
 /**
- * Switch the category captions in the loop.
+ * The first catagory caption.
  *
  * @since 2.0.0
- * 
+ *
  * @param obj $product WC_Mix_And_Match of parent product
  */
 function wc_mnm_first_category_caption($product)
 {
 }
 /**
+ * Display the category titles in the loop.
+ *
+ * @since 2.2.0
+ *
+ * @param obj $category WP_Term
+ * @param WC_Product_Mix_and_Match
+ */
+function wc_mnm_category_title($category, $product)
+{
+}
+/**
+ * Display the category descriptions in the loop.
+ *
+ * @since 2.4.0
+ *
+ * @param obj $category WP_Term
+ * @param WC_Product_Mix_and_Match
+ */
+function wc_mnm_category_description($category, $product)
+{
+}
+/**
+ * Edit container template for Mix and Match products.
+ *
+ * @since 2.2.0
+ *
+ * @param WC_Product_Mix_and_Match
+ * @param WC_Order_Item $order_item
+ * @param WC_Order $order
+ * @param  string $source The originating source loading this template
+ */
+function wc_mnm_template_edit_container_order_item($product, $order_item, $order, $source)
+{
+}
+/**
  * Batch processing limit.
- * 
+ *
  * @since 2.0.0
  * @return int
  */
@@ -7907,7 +8567,7 @@ function wc_mnm_update_batch_limit()
 }
 /**
  * Data Update for Version 1.2.0.
- * 
+ *
  * @return bool True to run again, false if completed.
  */
 function wc_mnm_update_120_main()
@@ -7957,7 +8617,7 @@ function wc_mnm_update_2x00_remove_notices()
  * see @link: https://github.com/kathyisawesome/woocommerce-mix-and-match-products/issues/371
  *
  * @since 2.0.0
- * 
+ *
  * @return bool True to run again, false if completed.
  */
 function wc_mnm_update_2x00_customizer_settings()
@@ -7967,7 +8627,7 @@ function wc_mnm_update_2x00_customizer_settings()
  * Set packing mode.
  *
  * @since 2.0.0
- * 
+ *
  * @return bool True to run again, false if completed.
  */
 function wc_mnm_update_2x00_packing_mode()
@@ -8012,6 +8672,14 @@ function wc_mnm_update_2x00_product_meta()
  * @since  2.0.0
  */
 function wc_mnm_update_2x00_cleanup_legacy_child_meta()
+{
+}
+/**
+ * Remove duplicate meta keys (again)
+ *
+ * @since 2.2.0
+ */
+function wc_mnm_update_2x2x0_delete_duplicate_meta()
 {
 }
 /**
